@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jera"]
   spec.homepage      = "https://github.com/jera/jera-payment"
   spec.email         = ["hospedagem@jera.com.br"]
-  spec.summary       = "Gem to use Pagar.me MercadoPago and Iugu Payment API's."
+  spec.summary       = "Gem to use Pagar.me, MercadoPago and Iugu Payment API's."
   spec.description   = "This gem consume the API's and integrate with your's project DB."
   spec.license       = "MIT"
 
@@ -20,5 +20,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'enumerize', '~> 2.2'
   spec.add_dependency 'httparty', '~> 0.16'
 
-  spec.add_development_dependency 'sqlite3', '~> 1.3' 
+  spec.add_development_dependency 'sqlite3', '~> 1.3'
 end

@@ -6,15 +6,8 @@ test/dummy/db/*.sqlite3-journal
 test/dummy/log/*.log
 test/dummy/tmp/
 test/dummy/.sass-cache
-test/dummy/config/initializers/jera_push.rb
-test/dummy/db/migrate/*create_jera_push_devices.rb
-test/dummy/db/migrate/*create_jera_push_messages.rb
-test/dummy/db/migrate/*create_jera_push_messages_devices.rb
-test/dummy/config/locales/jera_push.pt-BR.yml
-
-test/dummy/app/views/jera_push/*
-test/dummy/app/views/kaminari/*
-test/dummy/app/views/layouts/jera_push/*
+test/dummy/config/initializers/jera_payment.rb
+test/dummy/config/locales/jera_payment.pt-BR.yml
 
 # Created by https://www.gitignore.io/api/osx,linux,ruby
 
