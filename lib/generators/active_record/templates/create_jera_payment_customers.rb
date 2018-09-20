@@ -7,7 +7,7 @@ class CreateJeraPaymentCustomers < ActiveRecord::Migration[5.2]
       t.string :name
       t.integer :phone
       t.string :cpf_cpnj
-      t.references :customerable, polymorphic: true, index: true
+      t.references :customerable, polymorphic: true, index: {name: 'index_jera_payment_customers_on_customerable' }
 
       t.timestamps null: false
     end

@@ -1,6 +1,14 @@
 require 'httparty'
 require 'jera_payment/engine'
-require 'jera_push/services/iugu/customers/create'
+
+
+require_relative 'jera_payment/api/iugu/base'
+require_relative 'jera_payment/api/iugu/customer'
+
+require_relative 'jera_payment/services/iugu/base'
+require_relative 'jera_payment/services/iugu/customers/create'
+require_relative 'jera_payment/services/iugu/customers/update'
+require_relative 'jera_payment/services/iugu/customers/destroy'
 
 module JeraPayment
 
@@ -28,6 +36,6 @@ module JeraPayment
   @iugu_base_url = 'https://api.iugu.com/v1'
 
   def self.iugu_base_url
-    @base_url
+    @iugu_base_url
   end
 end

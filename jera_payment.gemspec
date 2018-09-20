@@ -1,11 +1,11 @@
+$:.push File.expand_path("../lib", __FILE__)
 
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "jera_payment/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "jera_payment"
   spec.version       = JeraPayment::VERSION
+  spec.required_ruby_version = '>= 2.5.0'
   spec.authors       = ["Jera"]
   spec.homepage      = "https://github.com/jera/jera-payment"
   spec.email         = ["hospedagem@jera.com.br"]

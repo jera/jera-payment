@@ -2,14 +2,14 @@ module JeraPayment
   module Services
     module Iugu
       module Customers
-        class Create < JeraPayment::Services::Iugu::Base
+        class Update < JeraPayment::Services::Iugu::Base
           def initialize(customer, attributes)
             @customer = customer
             @attributes = attributes
           end
 
           def call
-            iugu_customer = JeraPayment::Api::Iugu::Customer.create(@attributes)
+            iugu_customer = JeraPayment::Api::Iugu::Customer.update(@customer.api_id, @attributes)
 
             if iugu_customer[:errors].present?
               add_error(@customer, iugu_customer[:errors])

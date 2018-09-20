@@ -3,33 +3,22 @@ class JeraPayment::Customer < ActiveRecord::Base
 
   belongs_to :customerable, polymorphic: true
 
-  before_create :create_api_customer_on_iugu
-  before_update :update_customer_on_iugu
-  before_destroy :destroy_customer_on_iugu
+  before_create :create_api_customer
+  before_update :update_api_customer
+  before_destroy :destroy_api_customer
 
   def create_api_customer
-    response = JeraPayment::Services::Iugu::Customers::Create.new(self.attributes).call
-
-    self.iugu_id = response[:id]
+    api_creation = JeraPayment::Services::Iugu::Customers::Create.new(self, self.attributes).call
+    throw(:abort) unless api_creation
   end
 
-  def update_customer_on_iugu
-    response = SimpleIugu::Api::Customer.update(self.iugu_id, self.attributes)
-
-    if response[:errors].present?
-      response[:errors].map{ |error| self.errors.messages.merge(error) }
-      return false
-    end
+  def update_api_customer
+    api_update = JeraPayment::Services::Iugu::Customers::Update.new(self, self.attributes).call
+    throw(:abort) unless api_update
   end
 
-  def destroy_customer_on_iugu
-    response = SimpleIugu::Api::Customer.destroy(self.iugu_id)
-
-    if response[:errors].present?
-      response[:errors].map{ |error| self.errors.messages.merge(error) }
-      return false
-    end
-
-    self.destroy
+  def destroy_api_customer
+    api_destroy = JeraPayment::Services::Iugu::Customers::Destroy.new(self).call
+    throw(:abort) unless api_destroy
   end
 end
