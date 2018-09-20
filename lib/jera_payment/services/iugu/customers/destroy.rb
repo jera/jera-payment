@@ -3,20 +3,20 @@ module JeraPayment
     module Iugu
       module Customers
         class Destroy < JeraPayment::Services::Iugu::Base
-          def initialize(customer)
-            @customer = customer
+          def initialize(resource)
+            super
           end
 
           def call
-            iugu_delete_customer = JeraPayment::Api::Iugu::Customer.destroy(@customer.api_id)
+            iugu_delete_customer = JeraPayment::Api::Iugu::Customer.destroy(@resource.api_id)
 
             if iugu_delete_customer[:errors].present?
-              add_error(@customer, iugu_delete_customer[:errors])
+              add_error(iugu_delete_customer[:errors])
             else
-              @customer.destroy
+              @resource.destroy
             end
 
-            @customer.errors.blank?
+            @resource.errors.blank?
           end
 
         end
