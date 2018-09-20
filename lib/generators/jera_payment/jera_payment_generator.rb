@@ -18,6 +18,10 @@ class JeraPaymentGenerator < Rails::Generators::NamedBase
 				"\n\tModel \"#{file_name.titlecase}\" doesn't exists. Please, create your Model and try again."
 		end
 
+    inject_into_file model_path, "\n\thas_one :customer, as: :customerable, class_name: 'JeraPayment::Customer'", after: '< ActiveRecord::Base'
+
+    inject_into_file model_path, "\n\thas_one :customer, as: :customerable, class_name: 'JeraPayment::Customer'", after: '< ApplicationRecord'
+
     case self.behavior
     when :invoke
       generate "active_record:jera_payment", file_name

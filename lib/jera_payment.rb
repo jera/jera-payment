@@ -1,6 +1,10 @@
 require 'httparty'
+require 'jera_payment/engine'
+require 'jera_push/services/iugu/customers/create'
 
 module JeraPayment
+
+  autoload :Customer, 'jera_payment/models/customer.rb'
 
   mattr_accessor :api
   @@api = nil
@@ -21,7 +25,7 @@ module JeraPayment
     yield self
   end
 
-  @iugu_base_url = 'https://api.iugu.com/v1/'
+  @iugu_base_url = 'https://api.iugu.com/v1'
 
   def self.iugu_base_url
     @base_url
