@@ -1,19 +1,19 @@
 module JeraPayment
   module Services
     module Iugu
-      module Customers
+      module Invoices
         class Create < JeraPayment::Services::Iugu::Base
           def initialize(resource)
             super
           end
 
           def call
-            iugu_customer = JeraPayment::Api::Iugu::Customer.create(@attributes)
+            iugu_invoice = JeraPayment::Api::Iugu::Invoice.create(JeraPayment::Parsers::Iugu::InvoiceParser.invoice_creation(@resource))
 
-            if iugu_customer[:errors].present?
-              add_error(iugu_customer[:errors])
+            if iugu_invoice[:errors].present?
+              add_error(iugu_invoice[:errors])
             else
-              set_api_attributes(iugu_customer)
+              set_api_attributes(iugu_invoice)
             end
 
             @resource.errors.blank?
@@ -22,7 +22,7 @@ module JeraPayment
           private
           def set_api_attributes(attributes)
             @resource.api_id = attributes[:id]
-            @resource.assign_attributes(attributes.slice(:email, :name, :phone, :cpf_cpnj))
+            @resource.assign_attributes(attributes.slice(:total_cents, :secure_url, :digitable_line, :barcode_data, :barcode))
           end
         end
       end

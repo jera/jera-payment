@@ -1,24 +1,12 @@
 class JeraPayment::Customer < ActiveRecord::Base
+  include JeraPayment::Concerns::ResourceCallbacks
+
   self.table_name = "jera_payment_customers"
 
+  has_many :credit_cards, class_name: 'JeraPayment::CreditCard'
+  has_many :invoices, class_name: 'JeraPayment::Invoice'
+
   belongs_to :customerable, polymorphic: true
+  belongs_to :current_credit_card, class_name: 'JeraPayment::CreditCard', foreign_key: :current_credit_card_id, optional: true
 
-  before_create :create_api_customer
-  before_update :update_api_customer
-  before_destroy :destroy_api_customer
-
-  def create_api_customer
-    api_creation = JeraPayment::Services::Iugu::Customers::Create.new(self, self.attributes).call
-    throw(:abort) unless api_creation
-  end
-
-  def update_api_customer
-    api_update = JeraPayment::Services::Iugu::Customers::Update.new(self, self.attributes).call
-    throw(:abort) unless api_update
-  end
-
-  def destroy_api_customer
-    api_destroy = JeraPayment::Services::Iugu::Customers::Destroy.new(self).call
-    throw(:abort) unless api_destroy
-  end
 end

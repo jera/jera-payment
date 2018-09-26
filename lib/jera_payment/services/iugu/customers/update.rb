@@ -3,7 +3,7 @@ module JeraPayment
     module Iugu
       module Customers
         class Update < JeraPayment::Services::Iugu::Base
-          def initialize(resource, attributes)
+          def initialize(resource)
             super
           end
 
@@ -21,7 +21,6 @@ module JeraPayment
 
           private
           def set_api_attributes(attributes)
-            @resource.api_id = attributes[:id]
             @resource.assign_attributes(attributes.slice(:email, :name, :phone, :cpf_cpnj))
           end
         end
