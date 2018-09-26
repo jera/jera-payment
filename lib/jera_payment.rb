@@ -1,18 +1,11 @@
-require 'httparty'
-require 'jera_payment/engine'
-
-
-require_relative 'jera_payment/api/iugu/base'
-require_relative 'jera_payment/api/iugu/customer'
-
-require_relative 'jera_payment/services/iugu/base'
-require_relative 'jera_payment/services/iugu/customers/create'
-require_relative 'jera_payment/services/iugu/customers/update'
-require_relative 'jera_payment/services/iugu/customers/destroy'
+require 'jera_payment/application'
 
 module JeraPayment
 
   autoload :Customer, 'jera_payment/models/customer.rb'
+  autoload :CreditCard, 'jera_payment/models/credit_card.rb'
+  autoload :Invoice, 'jera_payment/models/invoice.rb'
+  autoload :Charge, 'jera_payment/models/charge.rb'
 
   mattr_accessor :api
   @@api = nil

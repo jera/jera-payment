@@ -1,4 +1,4 @@
-class CreateJeraPaymentCustomers < ActiveRecord::Migration[5.2]
+class CreateJeraPaymentCustomers < ActiveRecord::Migration<%= migration_version %>
   def change
     create_table :jera_payment_customers do |t|
 
@@ -8,6 +8,7 @@ class CreateJeraPaymentCustomers < ActiveRecord::Migration[5.2]
       t.integer :phone
       t.string :cpf_cpnj
       t.references :customerable, polymorphic: true, index: {name: 'index_jera_payment_customers_on_customerable' }
+      t.references :current_credit_card
 
       t.timestamps null: false
     end
