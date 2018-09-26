@@ -1,9 +1,9 @@
 require 'enumerize'
 
 class JeraPayment::Invoice < ActiveRecord::Base
-  extend Enumerize
   include JeraPayment::Concerns::ResourceCallbacks
   include JeraPayment::Concerns::InvoiceMethods
+  extend Enumerize
 
   attr_readonly :api_id, :customer, :email, :cc_emails, :due_date,
                 :ensure_workday_due_date, :items, :total_cents, :discount_cents,

@@ -17,7 +17,7 @@ class JeraPayment::Charge < ActiveRecord::Base
   def has_destroy_callback?
     false
   end
-  
+
   def items=(value)
     write_attribute(:items, value&.to_json)
   end
