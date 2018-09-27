@@ -9,15 +9,19 @@ module JeraPayment
           end
 
           def call
-            iugu_subscription = eval("JeraPayment::Api::Iugu::Subscription.#{@action.to_s}(@resource.api_id)")
+            begin
+              ApplicationRecord.transaction do
+                iugu_subscription = eval("JeraPayment::Api::Iugu::Subscription.#{@action.to_s}(@resource.api_id)")
 
-            if iugu_subscription[:errors].present?
-              add_error(iugu_subscription[:errors])
-            else
-              set_api_attributes(iugu_subscription)
+                raise(StandardError, iugu_subscription[:errors]) if iugu_subscription[:errors].present?
+
+                set_api_attributes(iugu_subscription)
+              end
+            rescue Exception => error
+              add_error(error.message)
             end
 
-            @resource.errors.blank?
+            @resource
           end
 
           private

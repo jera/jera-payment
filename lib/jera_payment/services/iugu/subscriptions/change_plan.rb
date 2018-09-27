@@ -10,15 +10,23 @@ module JeraPayment
           end
 
           def call
-            iugu_change_subscription_plan = eval("JeraPayment::Api::Iugu::Subscription.change_plan#{@simulation.to_s}(@resource.api_id, @plan_identifier)")
+            begin
+              ApplicationRecord.transaction do
+                iugu_change_subscription_plan = eval("JeraPayment::Api::Iugu::Subscription.change_plan#{@simulation.to_s}(@resource.api_id, @plan_identifier)")
 
-            if iugu_change_subscription_plan[:errors].present?
-              add_error(iugu_change_subscription_plan[:errors])
-            else
-              set_api_attributes(iugu_change_subscription_plan) unless @simulation.present?
+                raise(StandardError, iugu_change_subscription_plan[:errors]) if iugu_change_subscription_plan[:errors].present?
+
+                if @simulation.present?
+                  @resource = iugu_change_subscription_plan
+                else
+                  set_api_attributes(iugu_change_subscription_plan)
+                end
+              end
+            rescue Exception => error
+              add_error(error.message)
             end
 
-            @simulation.present? ? iugu_change_subscription_plan : @resource.errors.blank?
+            @resource
           end
 
           private

@@ -10,15 +10,19 @@ module JeraPayment
           end
 
           def call
-            iugu_subscription_credits = eval("JeraPayment::Api::Iugu::Subscription.#{@action.to_s}_credits(@resource.api_id, @credits)")
+            begin
+              ApplicationRecord.transaction do
+                iugu_subscription_credits = eval("JeraPayment::Api::Iugu::Subscription.#{@action.to_s}_credits(@resource.api_id, @credits)")
 
-            if iugu_subscription_credits[:errors].present?
-              add_error(iugu_subscription_credits[:errors])
-            else
-              set_api_attributes(iugu_subscription_credits)
+                raise(StandardError, iugu_subscription_credits[:errors]) if iugu_subscription_credits[:errors].present?
+
+                set_api_attributes(iugu_subscription_credits)
+              end
+            rescue Exception => error
+              add_error(error.message)
             end
 
-            @resource.errors.blank?
+            @resource
           end
 
           private
