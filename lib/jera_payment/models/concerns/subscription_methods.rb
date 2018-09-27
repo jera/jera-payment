@@ -20,12 +20,12 @@ module JeraPayment
           JeraPayment::Services::Iugu::Subscriptions::ChangePlan.new(self, plan_identifier).call
         end
 
-        def add_credits(attributes)
-          JeraPayment::Services::Iugu::Subscriptions::UpdateCredits.new(self, attributes, :add).call
+        def add_credits(credits)
+          JeraPayment::Services::Iugu::Subscriptions::UpdateCredits.new(self, credits, :add).call
         end
 
-        def remove_credits(attributes)
-          JeraPayment::Services::Iugu::Subscriptions::UpdateCredits.new(self, attributes, :remove).call
+        def remove_credits(credits)
+          JeraPayment::Services::Iugu::Subscriptions::UpdateCredits.new(self, credits, :remove).call
         end
 
         def plan
