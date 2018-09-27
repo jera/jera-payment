@@ -4,10 +4,10 @@ class JeraPayment::Plan < ActiveRecord::Base
   self.table_name = 'jera_payment_plans'
 
   def features=(value)
-    write_attribute(:items, value&.to_json)
+    write_attribute(:features, value&.to_json)
   end
 
   def features
-    ActiveSupport::JSON.decode(self[:items]).map{ |item| item.deep_symbolize_keys } if self[:items]
+    ActiveSupport::JSON.decode(self[:features]).map{ |item| item.deep_symbolize_keys } if self[:features]
   end
 end

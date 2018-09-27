@@ -122,6 +122,23 @@ pt-BR:
         value_cents: Preço em centavos
         payable_with: Pagável com
         features: Features
+      jera_payment/subscription:
+        id: ID
+        api_id: ID na API
+        api: ID na API
+        customer_id: ID do cliente
+        customer: Cliente
+        plan_identifier: Identificador do plano
+        expires_at: Expira em
+        only_on_charge_success: Criar assinatura se cobrança bem sucedida
+        ignore_due_email: Ignorar email de vencimento
+        payable_with: Pagável com
+        credits_based: Baseada em créditos
+        price_cents: Preço em centavos de recarga
+        credits_cycle: Qtde de créditos adicionados por ciclo
+        credits_min: Quantidade de créditos para ativar ciclo
+        subitems: Items adicionais
+        custom_variables: Variáveis personalizadas
   enumerize:
     jera_payment/invoice:
       status:

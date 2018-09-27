@@ -9,6 +9,7 @@ require 'jera_payment/api/iugu/payment_method'
 require 'jera_payment/api/iugu/invoice'
 require 'jera_payment/api/iugu/charge'
 require 'jera_payment/api/iugu/plan'
+require 'jera_payment/api/iugu/subscription'
 
 # PARSERS
 require 'jera_payment/parsers/iugu/credit_card_parser'
@@ -42,6 +43,14 @@ require 'jera_payment/services/iugu/plans/create'
 require 'jera_payment/services/iugu/plans/update'
 require 'jera_payment/services/iugu/plans/destroy'
 
+# IUGU SUBSCRIPTION SERVICES
+require 'jera_payment/services/iugu/subscriptions/create'
+require 'jera_payment/services/iugu/subscriptions/update'
+require 'jera_payment/services/iugu/subscriptions/destroy'
+require 'jera_payment/services/iugu/subscriptions/change_plan'
+require 'jera_payment/services/iugu/subscriptions/update_credits'
+require 'jera_payment/services/iugu/subscriptions/update_situation'
+
 #IUGU INVOICE CALLBACKS
 require 'jera_payment/services/iugu/handle_callbacks/invoice/base'
 require 'jera_payment/services/iugu/handle_callbacks/invoice/created'
@@ -56,3 +65,4 @@ require 'jera_payment/services/iugu/handle_callbacks/invoice/status_changed'
 # MODEL CONCERNS
 require 'jera_payment/models/concerns/resource_callbacks'
 require 'jera_payment/models/concerns/invoice_methods'
+require 'jera_payment/models/concerns/subscription_methods'
