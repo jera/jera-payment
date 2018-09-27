@@ -31,6 +31,22 @@ module JeraPayment
         def plan
           JeraPayment::Plan.find_by(identifier: self.plan_identifier)
         end
+
+        def subitems=(value)
+          write_attribute(:subitems, value&.to_json)
+        end
+
+        def subitems
+          ActiveSupport::JSON.decode(self[:subitems]).map{ |item| item.deep_symbolize_keys } if self[:subitems]
+        end
+
+        def custom_variables=(value)
+          write_attribute(:custom_variables, value&.to_json)
+        end
+
+        def custom_variables
+          ActiveSupport::JSON.decode(self[:custom_variables]).map{ |item| item.deep_symbolize_keys } if self[:custom_variables]
+        end
       end
 
     end
