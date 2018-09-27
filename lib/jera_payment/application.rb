@@ -8,6 +8,7 @@ require 'jera_payment/api/iugu/payment_token'
 require 'jera_payment/api/iugu/payment_method'
 require 'jera_payment/api/iugu/invoice'
 require 'jera_payment/api/iugu/charge'
+require 'jera_payment/api/iugu/plan'
 
 # PARSERS
 require 'jera_payment/parsers/iugu/credit_card_parser'
@@ -35,6 +36,11 @@ require 'jera_payment/services/iugu/invoices/send_email'
 
 # IUGU CHARGE SERVICES
 require 'jera_payment/services/iugu/charges/create'
+
+# IUGU PLAN SERVICES
+require 'jera_payment/services/iugu/plans/create'
+require 'jera_payment/services/iugu/plans/update'
+require 'jera_payment/services/iugu/plans/destroy'
 
 #IUGU INVOICE CALLBACKS
 require 'jera_payment/services/iugu/handle_callbacks/invoice/base'

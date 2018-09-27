@@ -114,6 +114,14 @@ pt-BR:
         state: Estado
         country: País
         complement: Complemento
+      jera_payment/plan:
+        name: Nome
+        identifier: Identificador
+        interval: Intervalo
+        interval_type: Tipo de intervalor
+        value_cents: Preço em centavos
+        payable_with: Pagável com
+        features: Features
   enumerize:
     jera_payment/invoice:
       status:
