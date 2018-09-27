@@ -27,6 +27,10 @@ module JeraPayment
         def remove_credits(attributes)
           JeraPayment::Services::Iugu::Subscriptions::UpdateCredits.new(self, attributes, :remove).call
         end
+
+        def plan
+          JeraPayment::Plan.find_by(identifier: self.plan_identifier)
+        end
       end
 
     end
