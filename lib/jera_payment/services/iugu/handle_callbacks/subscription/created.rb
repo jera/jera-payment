@@ -3,7 +3,7 @@ module JeraPayment
     module Iugu
       module HandleCallbacks
         module Subscription
-          class Created < JeraPayment::Services::Iugu::HandleCallbacks::Subscription::Base
+          class Created < Iugu::HandleCallbacks::Subscription::Base
             def initialize(params)
               super
             end

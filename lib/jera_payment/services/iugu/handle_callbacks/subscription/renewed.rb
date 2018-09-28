@@ -3,7 +3,7 @@ module JeraPayment
     module Iugu
       module HandleCallbacks
         module Subscription
-          class Renewed < JeraPayment::Services::Iugu::HandleCallbacks::Subscription::Base
+          class Renewed < Iugu::HandleCallbacks::Subscription::Base
             def initialize(params)
               super
             end
