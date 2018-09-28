@@ -9,6 +9,7 @@ class CreateJeraPaymentCustomers < ActiveRecord::Migration<%= migration_version 
       t.string :cpf_cnpj
       t.references :customerable, polymorphic: true, index: {name: 'index_jera_payment_customers_on_customerable' }
       t.references :current_credit_card
+      t.references :sub_account
 
       t.timestamps null: false
     end

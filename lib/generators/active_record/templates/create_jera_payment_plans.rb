@@ -10,6 +10,7 @@ class CreateJeraPaymentPlans < ActiveRecord::Migration<%= migration_version %>
       t.integer :value_cents
       t.string  :payable_with
       t.text    :features
+      t.references :sub_account
 
       t.timestamps null: false
     end

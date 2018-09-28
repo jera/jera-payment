@@ -12,7 +12,8 @@ module JeraPayment
             charge_body.merge!({ method: @resource.method}) if @resource.method.present?
             charge_body.merge!({ token: @resource.token}) if @resource.token.present?
 
-            iugu_charge = JeraPayment::Api::Iugu::Charge.create(charge_body)
+            iugu_charge = eval("JeraPayment::Api::Iugu::Charge.create(charge_body,
+                                                                      @resource&.invoice&.customer&.sub_account&.#{api_token})")
 
             if iugu_charge[:errors].present?
               add_error(iugu_charge[:errors])

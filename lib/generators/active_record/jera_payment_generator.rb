@@ -29,6 +29,10 @@ module ActiveRecord
         migration_template "create_jera_payment_subscriptions.rb", "db/migrate/create_jera_payment_subscriptions.rb", migration_version: migration_version
       end
 
+      def create_sub_accounts_table
+        migration_template "create_jera_payment_sub_accounts.rb", "db/migrate/create_jera_payment_sub_accounts.rb", migration_version: migration_version
+      end
+
       def rails5?
         Rails.version.start_with? '5'
       end

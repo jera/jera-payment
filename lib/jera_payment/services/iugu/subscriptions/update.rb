@@ -8,7 +8,8 @@ module JeraPayment
           end
 
           def call
-            iugu_subscription = JeraPayment::Api::Iugu::Subscription.update(@resource.api_id, @attributes.merge({customer_id: @resource.customer.api_id}))
+            iugu_subscription = eval("JeraPayment::Api::Iugu::Subscription.update(@resource.api_id, @attributes.merge({customer_id: @resource.customer.api_id}),
+                                                                              @resource&.customer&.sub_account&.#{api_token})")
 
             add_error(iugu_subscription[:errors]) if iugu_subscription[:errors].present?
 

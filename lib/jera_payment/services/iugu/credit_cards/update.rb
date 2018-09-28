@@ -8,7 +8,8 @@ module JeraPayment
           end
 
           def call
-            iugu_credit_card = JeraPayment::Api::Iugu::PaymentMethod.update(@resource.customer.api_id, @resource.api_id, @resource.attributes)
+            iugu_credit_card = eval("JeraPayment::Api::Iugu::PaymentMethod.update(@resource.customer.api_id, @resource.api_id, @resource.attributes,
+                                                                                  @resource.customer&.sub_account&.#{api_token})")
 
             add_error(iugu_credit_card[:errors]) if iugu_credit_card[:errors].present?
 
