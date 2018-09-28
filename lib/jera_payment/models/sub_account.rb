@@ -1,5 +1,6 @@
 class JeraPayment::SubAccount < ActiveRecord::Base
   include JeraPayment::Concerns::ResourceCallbacks
+  include JeraPayment::Concerns::SubAccountMethods
 
   self.table_name = "jera_payment_customers"
 
@@ -7,9 +8,5 @@ class JeraPayment::SubAccount < ActiveRecord::Base
   has_many :customers, class_name: 'JeraPayment::Customer', optional: true
 
   belongs_to :sub_accountable, polymorphic: true
-
-  def api_token
-    JeraPayment.is_test ? 'test_api_token' : 'live_api_token'
-  end
 
 end
