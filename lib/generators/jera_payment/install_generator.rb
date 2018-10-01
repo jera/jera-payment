@@ -27,6 +27,7 @@ module JeraPayment
         copy_subscription_files
         copy_invoice_files
         copy_sub_account_files
+        copy_withdrawal_files
       end
 
       private
@@ -51,6 +52,14 @@ module JeraPayment
 
         files.each do |file|
           copy_file "../../../jera_payment/services/iugu/handle_callbacks/referrals/#{file}.rb", "app/services/iugu/handle_callbacks/referrals/#{file}.rb"
+        end
+      end
+
+      def copy_withdrawal_files
+        files = ['base', 'created', 'status_changed']
+
+        files.each do |file|
+          copy_file "../../../jera_payment/services/iugu/handle_callbacks/withdraw_request/#{file}.rb", "app/services/iugu/handle_callbacks/withdraw_request/#{file}.rb"
         end
       end
 
