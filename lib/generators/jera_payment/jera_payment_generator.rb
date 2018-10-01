@@ -20,9 +20,8 @@ class JeraPaymentGenerator < Rails::Generators::NamedBase
 
       inject_into_file model_path, "\n\thas_one :#{arg.underscore}, as: :#{polymorfic_model_name(arg)}, class_name: 'JeraPayment::#{arg}'", after: '< ApplicationRecord'
     end
-    
-  end
 
+  end
 
   private
 
@@ -63,3 +62,26 @@ end
 
 
 
+<<<<<<< HEAD
+=======
+	  def model_path
+		  @model_path ||= File.join("app", "models", "#{file_path}.rb")
+		end
+
+    def copy_subscription_files
+      files = ['base', 'activated', 'changed', 'created', 'expired', 'renewed', 'suspended']
+
+      files.each do |file|
+        copy_file "../../../jera_payment/services/iugu/handle_callbacks/subscription/#{file}.rb", "app/services/iugu/handle_callbacks/subscription/#{file}.rb"
+      end
+    end
+
+    def copy_invoice_files
+      files = ['base', 'created', 'due', 'dunning_action', 'installment_released', 'payment_failed', 'refund', 'released', 'status_changed']
+
+      files.each do |file|
+        copy_file "../../../jera_payment/services/iugu/handle_callbacks/invoice/#{file}.rb", "app/services/iugu/handle_callbacks/invoice/#{file}.rb"
+      end
+    end
+end
+>>>>>>> develop
