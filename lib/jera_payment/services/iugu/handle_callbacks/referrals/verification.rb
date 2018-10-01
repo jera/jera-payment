@@ -13,6 +13,7 @@ module Iugu
 
           if @params["data"]["status"] == 'accepted'
             @sub_account.update_columns(can_receive?: true, is_verified?: true)
+            @sub_account.households.last.update(status: :accepted)
           else
             @sub_account.update_columns(last_verification_request_feedback: @params["data"]["feedback"])
           end

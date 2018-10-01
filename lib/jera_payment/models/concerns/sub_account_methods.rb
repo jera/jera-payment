@@ -9,7 +9,7 @@ module JeraPayment
         end
 
         def api_token
-          JeraPayment.is_test ? 'test_api_token' : 'live_api_token'
+          JeraPayment.is_test ? self.test_api_token : self.live_api_token
         end
 
         def has_destroy_callback?

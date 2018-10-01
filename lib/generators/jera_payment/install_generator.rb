@@ -48,7 +48,7 @@ module JeraPayment
       end
 
       def copy_sub_account_files
-        files = ['base', 'verification']
+        files = ['base', 'verification', 'bank_verification']
 
         files.each do |file|
           copy_file "../../../jera_payment/services/iugu/handle_callbacks/referrals/#{file}.rb", "app/services/iugu/handle_callbacks/referrals/#{file}.rb"

@@ -13,7 +13,7 @@ module JeraPayment
             begin
               ApplicationRecord.transaction do
                 iugu_subscription_credits = eval("JeraPayment::Api::Iugu::Subscription.#{@action.to_s}_credits(@resource.api_id, @credits,
-                                                                                                               @resource&.customer&.sub_account&.#{api_token})")
+                                                                                                               @resource&.customer&.sub_account&.api_token)")
 
                 raise(StandardError, iugu_subscription_credits[:errors]) if iugu_subscription_credits[:errors].present?
 

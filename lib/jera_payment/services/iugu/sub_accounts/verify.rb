@@ -33,8 +33,9 @@ module JeraPayment
           end
 
           def create_household
-            #TODO
-            # @resource.households.create(@attributes[:data].slice(:bank, :bank_ag, :account_type, :bank_cc).merge({verification_account: true}))
+            @resource.households.create(@attributes[:data].slice(:bank_ag, :bank_cc).merge({ verification: true,
+                                                                                             bank: JeraPayment::Household.to_enumerize(@attributes[:data][:bank]),
+                                                                                             account_type: JeraPayment::Household.to_enumerize(@attributes[:data][:account_type]) }))
           end
         end
       end

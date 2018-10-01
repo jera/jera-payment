@@ -37,6 +37,10 @@ module ActiveRecord
         migration_template "create_jera_payment_withdrawals.rb", "db/migrate/create_jera_payment_withdrawals.rb", migration_version: migration_version
       end
 
+      def create_households_table
+        migration_template "create_jera_payment_households.rb", "db/migrate/create_jera_payment_households.rb", migration_version: migration_version
+      end
+
       def rails5?
         Rails.version.start_with? '5'
       end

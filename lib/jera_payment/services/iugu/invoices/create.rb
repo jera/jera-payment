@@ -9,7 +9,7 @@ module JeraPayment
 
           def call
             iugu_invoice = eval("JeraPayment::Api::Iugu::Invoice.create(JeraPayment::Parsers::Iugu::InvoiceParser.invoice_creation(@resource),
-                                                                        @resource&.customer&.sub_account&.#{api_token})")
+                                                                        @resource&.customer&.sub_account&.api_token)")
 
             if iugu_invoice[:errors].present?
               add_error(iugu_invoice[:errors])

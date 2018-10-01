@@ -24,7 +24,7 @@ module JeraPayment
           private
           def create_credit_card_token
             eval("JeraPayment::Api::Iugu::PaymentToken.create(JeraPayment::Parsers::Iugu::CreditCardParser.parse_payment_token(@resource),
-                                                              @resource.customer&.sub_account&.#{api_token})")
+                                                              @resource.customer&.sub_account&.api_token)")
           end
 
           def set_payment_token_attributes(credit_card_token)
@@ -34,7 +34,7 @@ module JeraPayment
           def link_credit_card(credit_card_token_id)
             eval("JeraPayment::Api::Iugu::PaymentMethod.create(@resource.customer.api_id,
                                                               JeraPayment::Parsers::Iugu::CreditCardParser.parse_payment_method(@resource, credit_card_token_id),
-                                                              @resource.customer&.sub_account&.#{api_token})")
+                                                              @resource.customer&.sub_account&.api_token)")
           end
 
         end

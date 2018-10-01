@@ -10,6 +10,7 @@ module JeraPayment
   autoload :Subscription, 'jera_payment/models/subscription.rb'
   autoload :SubAccount, 'jera_payment/models/sub_account.rb'
   autoload :Withdrawal, 'jera_payment/models/withdrawal.rb'
+  autoload :Household, 'jera_payment/models/household.rb'
 
   mattr_accessor :api
   @@api = nil

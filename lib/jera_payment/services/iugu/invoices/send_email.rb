@@ -9,7 +9,7 @@ module JeraPayment
 
           def call
             send_email = eval("JeraPayment::Api::Iugu::Invoice.send_email(@resource.api_id,
-                                                                          @resource&.customer&.sub_account&.#{api_token})")
+                                                                          @resource&.customer&.sub_account&.api_token)")
 
             add_error(send_email[:errors]) if send_email[:errors].present?
 

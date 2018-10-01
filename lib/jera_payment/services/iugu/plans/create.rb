@@ -9,7 +9,7 @@ module JeraPayment
 
           def call
             iugu_plan = eval("JeraPayment::Api::Iugu::Plan.create(@attributes,
-                                                                  @resource&.sub_account&.#{api_token})")
+                                                                  @resource&.sub_account&.api_token)")
 
             if iugu_plan[:errors].present?
               add_error(iugu_plan[:errors])

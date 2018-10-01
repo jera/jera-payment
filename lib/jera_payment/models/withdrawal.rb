@@ -1,7 +1,10 @@
+require 'enumerize'
+
 class JeraPayment::Withdrawal < ActiveRecord::Base
   include JeraPayment::Concerns::ResourceCallbacks
+  extend Enumerize
 
-  attr_readonly :api_id, :sub_account, :amount, :custom_variables  
+  attr_readonly :api_id, :sub_account, :amount, :custom_variables
 
   self.table_name = 'jera_payment_withdrawals'
 

@@ -1,6 +1,15 @@
 pt-BR:
   activerecord:
     models:
+      jera_payment/household:
+        one: Conta bancária
+        other: Contas bancárias
+      jera_payment/withdrawal:
+        one: Saque
+        other: Saques
+      jera_payment/sub_account:
+        one: Subconta
+        other: Subcontas
       jera_payment/customer:
         one: Cliente
         other: Clientes
@@ -14,6 +23,59 @@ pt-BR:
         one: Cobrança
         other: Cobranças
     attributes:
+      jera_payment/household:
+        id: ID
+        sub_account: Subconta
+        sub_account_id: ID Subconta
+        agency: Agência
+        account: Conta
+        account_type: Tipo de conta
+        bank: Banco
+        document: Documento
+        status: Situação
+        feedback: Feedback
+        verification: Criada na verificação?
+      jera_payment/withdrawal:
+        id: ID
+        api_id: API ID
+        api: API ID
+        amount: Valor
+        custom_variables: Variáveis customizadas
+        status: Situação
+        feedback: Feedback
+        sub_account: Subconta
+        sub_account_id: ID Subconta
+      jera_payment/sub_account:
+        id: ID
+        account_id: API ID
+        account: API ID
+        current_household: Conta bancária atual
+        current_household_id: ID Conta bancária atual
+        sub_accountable: Titular
+        name: Nome
+        comissions: Comissões
+        auto_withdrawal: Saque automático
+        fines: Multas
+        per_day_interest: Juros por dia de atraso
+        late_payment_fine: Valor da multa por atraso
+        auto_advance: Antecipação automática
+        auto_advance_type: Tipo de antecipação
+        auto_advance_option: Opção de antecipação
+        bank_slip: Boleto
+        credit_card: Cartão de crédito
+        payment_email_notification: Notificação de pagamento realizado
+        payment_email_notification_receiver: Email para notificação de pagamento realizado
+        early_payment_discount: Desconto por pagamento antecipado
+        early_payment_discounts: Configuração do desconto de pagamento antecipado
+        subscriptions_billing_days: Dias para criação de faturas para próximo ciclo
+        subscriptions_trial_period: Duração do período de teste (dias)
+        default_return_url:  URL para redirecionamento pós pagamento
+        owner_emails_to_notify: Emails que recem notificações da conta
+        resp_name: Nome do responsável
+        resp_cpf: CPF do responsável
+        can_receive?: Pode receber?
+        is_verified?: Verificado?
+        last_verification_request_feedback: Último feedback
       jera_payment/customer:
         id: ID
         api_id: API ID
@@ -98,7 +160,7 @@ pt-BR:
         subscription_api: API ID da Assinatura
         credits: Créditos
         early_payment_discount: Desconto por pagamento antecipado
-        early_payment_discounts: Configuração do desconto antecipado
+        early_payment_discounts: Configuração do desconto de pagamento antecipado
         secure_url: URL da fatura
         duplicated: Fatura duplicada
         cpf_cnpj: CPF/CNPJ
@@ -140,6 +202,31 @@ pt-BR:
         subitems: Items adicionais
         custom_variables: Variáveis personalizadas
   enumerize:
+    jera_payment/withdrawal:
+      status:
+        pending: Pendente
+        processing: Processando
+        accepted: Aceito
+        rejected: Recusado
+    jera_payment/household:
+      account_type:
+        checking: Corrente
+        savings: Poupança
+      bank:
+        itau: Itaú
+        bradesco: Bradesco
+        caixa_economica: Caixa Econômica
+        banco_do_brasil: Banco do Brasil
+        santander: Santander
+        banrisul: Banrisul
+        sicredi: Sicredi
+        sicoob: Sicoob
+        inter: Inter
+        brb: BRB
+      status:
+        pending: Pendente
+        accepted: Aceito
+        rejected: Recusado
     jera_payment/invoice:
       status:
         pending: Pendente
