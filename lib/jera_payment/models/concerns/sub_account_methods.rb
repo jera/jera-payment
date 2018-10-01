@@ -4,6 +4,14 @@ module JeraPayment
       extend ActiveSupport::Concern
 
       included do
+        def request_withdrawal(attributes)
+          #TODO
+        end
+
+        def verify(attributes)
+          JeraPayment::Services::Iugu::SubAccounts::Verify.new(self, attibutes).call
+        end
+
         def api_token
           JeraPayment.is_test ? 'test_api_token' : 'live_api_token'
         end

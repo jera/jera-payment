@@ -26,6 +26,11 @@ class CreateJeraPaymentSubAccounts < ActiveRecord::Migration<%= migration_versio
       t.integer :subscriptions_trial_period
       t.string :default_return_url
       t.string :owner_emails_to_notify
+      t.string :resp_name
+      t.string :resp_cpf
+      t.boolean :can_receive?
+      t.boolean :is_verified?
+      t.string :last_verification_request_feedback
 
       t.timestamps null: false
     end

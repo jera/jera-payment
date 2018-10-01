@@ -26,6 +26,7 @@ module JeraPayment
       def callback_services
         copy_subscription_files
         copy_invoice_files
+        copy_sub_account_files
       end
 
       private
@@ -42,6 +43,14 @@ module JeraPayment
 
         files.each do |file|
           copy_file "../../../jera_payment/services/iugu/handle_callbacks/invoice/#{file}.rb", "app/services/iugu/handle_callbacks/invoice/#{file}.rb"
+        end
+      end
+
+      def copy_sub_account_files
+        files = ['base', 'verification']
+
+        files.each do |file|
+          copy_file "../../../jera_payment/services/iugu/handle_callbacks/referrals/#{file}.rb", "app/services/iugu/handle_callbacks/referrals/#{file}.rb"
         end
       end
 

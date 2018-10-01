@@ -10,6 +10,7 @@ require 'jera_payment/api/iugu/invoice'
 require 'jera_payment/api/iugu/charge'
 require 'jera_payment/api/iugu/plan'
 require 'jera_payment/api/iugu/subscription'
+require 'jera_payment/api/iugu/sub_account'
 
 # PARSERS
 require 'jera_payment/parsers/iugu/credit_card_parser'
@@ -50,6 +51,11 @@ require 'jera_payment/services/iugu/subscriptions/destroy'
 require 'jera_payment/services/iugu/subscriptions/change_plan'
 require 'jera_payment/services/iugu/subscriptions/update_credits'
 require 'jera_payment/services/iugu/subscriptions/update_situation'
+
+# IUGU SUBACCOUNT SERVICES
+require 'jera_payment/services/iugu/sub_accounts/create'
+require 'jera_payment/services/iugu/sub_accounts/update'
+require 'jera_payment/services/iugu/sub_accounts/verify'
 
 # IUGU INVOICE CALLBACKS
 # require 'jera_payment/services/iugu/handle_callbacks/invoice/base'
