@@ -7,7 +7,7 @@ module Iugu
         end
 
         def call
-          @sub_account = JeraPayment::SubAccount.find_by(account_id: @params["data"["id"]])
+          @sub_account = JeraPayment::SubAccount.find_by(account_id: @params["data"]["id"]])
 
           return 404 unless @sub_account.present?
 

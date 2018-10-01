@@ -57,26 +57,6 @@ require 'jera_payment/services/iugu/sub_accounts/create'
 require 'jera_payment/services/iugu/sub_accounts/update'
 require 'jera_payment/services/iugu/sub_accounts/verify'
 
-# IUGU INVOICE CALLBACKS
-# require 'jera_payment/services/iugu/handle_callbacks/invoice/base'
-# require 'jera_payment/services/iugu/handle_callbacks/invoice/created'
-# require 'jera_payment/services/iugu/handle_callbacks/invoice/due'
-# require 'jera_payment/services/iugu/handle_callbacks/invoice/dunning_action'
-# require 'jera_payment/services/iugu/handle_callbacks/invoice/installment_released'
-# require 'jera_payment/services/iugu/handle_callbacks/invoice/payment_failed'
-# require 'jera_payment/services/iugu/handle_callbacks/invoice/refund'
-# require 'jera_payment/services/iugu/handle_callbacks/invoice/released'
-# require 'jera_payment/services/iugu/handle_callbacks/invoice/status_changed'
-
-# IUGU SUBSCRIPTION CALLBACKS
-# require 'jera_payment/services/iugu/handle_callbacks/subscription/base'
-# require 'jera_payment/services/iugu/handle_callbacks/subscription/activated'
-# require 'jera_payment/services/iugu/handle_callbacks/subscription/changed'
-# require 'jera_payment/services/iugu/handle_callbacks/subscription/created'
-# require 'jera_payment/services/iugu/handle_callbacks/subscription/expired'
-# require 'jera_payment/services/iugu/handle_callbacks/subscription/renewed'
-# require 'jera_payment/services/iugu/handle_callbacks/subscription/suspended'
-
 # MODEL CONCERNS
 require 'jera_payment/models/concerns/resource_callbacks'
 require 'jera_payment/models/concerns/invoice_methods'
