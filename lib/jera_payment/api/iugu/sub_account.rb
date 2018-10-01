@@ -28,12 +28,6 @@ module JeraPayment
           response = get(url, nil, access_token)
         end
 
-        def self.request_withdrawal(id, body = {}, access_token = nil)
-          url = "#{BASE_ENDPOINT}/#{id}/request_withdraw"
-
-          response = post(url, body, access_token)
-        end
-
         def self.list_accounts(query = nil, access_token = nil)
           url = 'marketplace'
 

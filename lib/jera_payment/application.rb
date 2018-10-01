@@ -11,6 +11,7 @@ require 'jera_payment/api/iugu/charge'
 require 'jera_payment/api/iugu/plan'
 require 'jera_payment/api/iugu/subscription'
 require 'jera_payment/api/iugu/sub_account'
+require 'jera_payment/api/iugu/withdrawal'
 require 'jera_payment/api/iugu/household'
 
 # PARSERS

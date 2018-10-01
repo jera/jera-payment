@@ -8,7 +8,7 @@ module JeraPayment
           end
 
           def call
-            iugu_withdrawal = eval("JeraPayment::Api::Iugu::SubAccount.request_withdrawal(@resource&.sub_account&.account_id, @attributes,
+            iugu_withdrawal = eval("JeraPayment::Api::Iugu::Withdrawal.request_withdrawal(@resource&.sub_account&.account_id, @attributes,
                                                                   @resource&.sub_account&.api_token)")
 
             if iugu_withdrawal[:errors].present?
