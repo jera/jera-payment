@@ -1,6 +1,9 @@
 pt-BR:
   activerecord:
     models:
+      jera_payment/transfer:
+        one: Transferência entre Subconta
+        other: Transferências entre Subcontas
       jera_payment/household:
         one: Conta bancária
         other: Contas bancárias
@@ -23,6 +26,17 @@ pt-BR:
         one: Cobrança
         other: Cobranças
     attributes:
+      jera_payment/transfer:
+        id: ID
+        api_id: API ID
+        api: API ID
+        sub_account: Subconta
+        sub_account_id: ID Subconta
+        receiver: Destinatário
+        receiver_id: ID Destinatário
+        amount_cents: Valor em centavos
+        amount_localized: Valor em reais
+        custom_variables: Variáveis customizadas
       jera_payment/household:
         id: ID
         sub_account: Subconta

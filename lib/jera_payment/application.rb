@@ -13,11 +13,13 @@ require 'jera_payment/api/iugu/subscription'
 require 'jera_payment/api/iugu/sub_account'
 require 'jera_payment/api/iugu/withdrawal'
 require 'jera_payment/api/iugu/household'
+require 'jera_payment/api/iugu/transfer'
 
 # PARSERS
 require 'jera_payment/parsers/iugu/credit_card_parser'
 require 'jera_payment/parsers/iugu/invoice_parser'
 require 'jera_payment/parsers/iugu/charge_parser'
+require 'jera_payment/parsers/iugu/transfer_parser'
 
 #SERVICES BASE
 require 'jera_payment/services/iugu/base'
@@ -62,8 +64,13 @@ require 'jera_payment/services/iugu/sub_accounts/verify'
 # IUGU HOUSEHOLD SERVICES
 require 'jera_payment/services/iugu/households/create'
 
+# IUGU TRANSFER SERVICES
+require 'jera_payment/services/iugu/transfers/create'
+
 # MODEL CONCERNS
 require 'jera_payment/models/concerns/resource_callbacks'
 require 'jera_payment/models/concerns/invoice_methods'
 require 'jera_payment/models/concerns/subscription_methods'
 require 'jera_payment/models/concerns/household_methods'
+require 'jera_payment/models/concerns/withdrawal_methods'
+require 'jera_payment/models/concerns/transfer_methods'
