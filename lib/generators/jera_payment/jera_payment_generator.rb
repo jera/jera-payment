@@ -12,6 +12,11 @@ class JeraPaymentGenerator < Rails::Generators::NamedBase
     copy_file '../../../../config/locale/jera_payment.pt-BR.yml', 'config/locales/jera_payment.pt-BR.yml'
   end
 
+  def callback_services
+    copy_subscription_files
+    copy_invoice_files
+  end
+
   def generate_migrations
 		unless model_exists?
 			raise MissingModel,
@@ -39,4 +44,20 @@ class JeraPaymentGenerator < Rails::Generators::NamedBase
 	  def model_path
 		  @model_path ||= File.join("app", "models", "#{file_path}.rb")
 		end
+
+    def copy_subscription_files
+      files = ['base', 'activated', 'changed', 'created', 'expired', 'renewed', 'suspended']
+
+      files.each do |file|
+        copy_file "../../../jera_payment/services/iugu/handle_callbacks/subscription/#{file}.rb", "app/services/iugu/handle_callbacks/subscription/#{file}.rb"
+      end
+    end
+
+    def copy_invoice_files
+      files = ['base', 'created', 'due', 'dunning_action', 'installment_released', 'payment_failed', 'refund', 'released', 'status_changed']
+
+      files.each do |file|
+        copy_file "../../../jera_payment/services/iugu/handle_callbacks/invoice/#{file}.rb", "app/services/iugu/handle_callbacks/invoice/#{file}.rb"
+      end
+    end
 end

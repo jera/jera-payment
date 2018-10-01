@@ -21,6 +21,14 @@ module ActiveRecord
         migration_template "create_jera_payment_charges.rb", "db/migrate/create_jera_payment_charges.rb", migration_version: migration_version
       end
 
+      def create_plans_table
+        migration_template "create_jera_payment_plans.rb", "db/migrate/create_jera_payment_plans.rb", migration_version: migration_version
+      end
+
+      def create_subscriptions_table
+        migration_template "create_jera_payment_subscriptions.rb", "db/migrate/create_jera_payment_subscriptions.rb", migration_version: migration_version
+      end
+
       def rails5?
         Rails.version.start_with? '5'
       end

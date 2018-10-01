@@ -8,6 +8,7 @@ It's composed for:
   * [CreditCard](#credit_cards): model responsible for register the customers payment methods.
   * [Invoice](#invoices): model responsible for register the api invoices
   * [Charge](#charges): model responsible for payment of invoices.
+  * [Plan](#plans): model responsible for register the account plans.
 
 
 ## Getting started
@@ -54,7 +55,7 @@ end
 |----------|------------|-------------|
 | customerable_id | BigInt | Your model's ID that has_one JeraPayment::Customer |
 | customerable_type | BigInt | Your model's name that has_one JeraPayment::Customer |
-| api_id | String | The customer API's ID |
+| api_id | String | Customer's API ID |
 | email | String | Customer email |
 | name | String | Customer name |
 | phone | String | Customer phone |
@@ -90,14 +91,14 @@ end
 | Attribute|    Type    | Description |
 |----------|------------|-------------|
 | customer_id | BigInt | Your project's Customer Id |
-| api_id | String | The invoice API's ID |
+| api_id | String | Invoice's API ID |
 | status | Enumerize | Invoice Status (pending, paid, canceled, partially_paid, refunded, expired, authorized, in_protest, chargeback, in_analysis) |
 | email | String | Customer e-mail |
 | cc_emails | String | -- |
 | due_date | String | -- |
 | cc_emails | String | -- |
 | ensure_workday_due_date | Boolean | -- |
-| items | Json | -- |
+| items | Text (send as hash) | -- |
 | total_cents | Int | -- |
 | discount_cents | Int | -- |
 | payable_with | String | -- |
@@ -114,7 +115,7 @@ end
 | subscription_api_id | String | -- |
 | credits | Int | -- |
 | early_payment_discount | Boolean | -- |
-| early_payment_discounts | Json | -- |
+| early_payment_discounts | Text (send as hash) | -- |
 | cpf_cnpj | String | -- |
 | name | String | -- |
 | phone_prefix | String | -- |
@@ -154,7 +155,7 @@ end
 | discount_cents | Int | -- |
 | bank_slip_extra_days | Int | -- |
 | keep_dunning | Boolean | -- |
-| items | Json | -- |
+| items | Text (send as hash) | -- |
 | cpf_cnpj | String | -- |
 | name | String | -- |
 | phone_prefix | String | -- |
@@ -174,6 +175,23 @@ end
 | barcode_data | String | -- |
 | barcode | String | -- |
 | duplicated | Boolean | -- |
+
+## Plan
+
+> Model responsible for register the account plans.
+
+### Attributes
+
+| Attribute|    Type    | Description |
+|----------|------------|-------------|
+| api_id | String | Plan's API ID |
+| name | String | Plan's name |
+| identifier | String | Plan's identifier |
+| interval | Int | Number interval for payment |
+| interval_type | String | Interval type |
+| value_cents | String | Plan's price in cents |
+| payable_with | String | Payment method disponible |
+| features | Text (send as hash) | -- |
 
 
 ### Model Methods
@@ -276,6 +294,20 @@ end
     User.first.customer.invoices.first.create_charge(SCHEMA_ATTRIBUTES)
     ```
 
+#### PLAN
+  * CREATE
+    ```ruby
+    JeraPayment::Plan.create(SCHEMA_ATTRIBUTES)
+    ```
+  * UPDATE
+    ```ruby
+    JeraPayment::Plan.first.update(SCHEMA_ATTRIBUTES)
+    ```
+  * DESTROY
+    ```ruby
+    JeraPayment::Plan.first.destroy
+    ```
+
 ### API Methods
   * All the access_token are only filth when using marketplace api token.
   * All the arguments passed to the methods are directly send to Iugu's API.
@@ -373,4 +405,25 @@ end
     JeraPayment::Api::Iugu::Charge.create(body, access_token = nil) # body is HASH and access_token can be nil
     ```
 
+##### PLAN
+  * INDEX
+    ```ruby
+    JeraPayment::Api::Iugu::Plan.index(plan_api_id, access_token = nil) # access_token can be nil
+    ```
+  * SHOW
+    ```ruby
+    JeraPayment::Api::Iugu::Plan.show(plan_api_id, access_token = nil) # access_token can be nil
+    ```
+  * CREATE
+    ```ruby
+    JeraPayment::Api::Iugu::Plan.create(body, access_token = nil) # body is HASH and access_token can be nil
+    ```
+  * UPDATE
+    ```ruby
+    JeraPayment::Api::Iugu::Plan.update(plan_api_id, body, access_token = nil) # body is HASH and access_token can be nil
+    ```
+  * DESTROY
+    ```ruby
+    JeraPayment::Api::Iugu::Plan.destroy(plan_api_id, access_token = nil) # access_token can be nil
+    ```
 
