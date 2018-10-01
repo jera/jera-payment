@@ -8,6 +8,8 @@ require 'jera_payment/api/iugu/payment_token'
 require 'jera_payment/api/iugu/payment_method'
 require 'jera_payment/api/iugu/invoice'
 require 'jera_payment/api/iugu/charge'
+require 'jera_payment/api/iugu/plan'
+require 'jera_payment/api/iugu/subscription'
 
 # PARSERS
 require 'jera_payment/parsers/iugu/credit_card_parser'
@@ -36,17 +38,40 @@ require 'jera_payment/services/iugu/invoices/send_email'
 # IUGU CHARGE SERVICES
 require 'jera_payment/services/iugu/charges/create'
 
-#IUGU INVOICE CALLBACKS
-require 'jera_payment/services/iugu/handle_callbacks/invoice/base'
-require 'jera_payment/services/iugu/handle_callbacks/invoice/created'
-require 'jera_payment/services/iugu/handle_callbacks/invoice/due'
-require 'jera_payment/services/iugu/handle_callbacks/invoice/dunning_action'
-require 'jera_payment/services/iugu/handle_callbacks/invoice/installment_released'
-require 'jera_payment/services/iugu/handle_callbacks/invoice/payment_failed'
-require 'jera_payment/services/iugu/handle_callbacks/invoice/refund'
-require 'jera_payment/services/iugu/handle_callbacks/invoice/released'
-require 'jera_payment/services/iugu/handle_callbacks/invoice/status_changed'
+# IUGU PLAN SERVICES
+require 'jera_payment/services/iugu/plans/create'
+require 'jera_payment/services/iugu/plans/update'
+require 'jera_payment/services/iugu/plans/destroy'
+
+# IUGU SUBSCRIPTION SERVICES
+require 'jera_payment/services/iugu/subscriptions/create'
+require 'jera_payment/services/iugu/subscriptions/update'
+require 'jera_payment/services/iugu/subscriptions/destroy'
+require 'jera_payment/services/iugu/subscriptions/change_plan'
+require 'jera_payment/services/iugu/subscriptions/update_credits'
+require 'jera_payment/services/iugu/subscriptions/update_situation'
+
+# IUGU INVOICE CALLBACKS
+# require 'jera_payment/services/iugu/handle_callbacks/invoice/base'
+# require 'jera_payment/services/iugu/handle_callbacks/invoice/created'
+# require 'jera_payment/services/iugu/handle_callbacks/invoice/due'
+# require 'jera_payment/services/iugu/handle_callbacks/invoice/dunning_action'
+# require 'jera_payment/services/iugu/handle_callbacks/invoice/installment_released'
+# require 'jera_payment/services/iugu/handle_callbacks/invoice/payment_failed'
+# require 'jera_payment/services/iugu/handle_callbacks/invoice/refund'
+# require 'jera_payment/services/iugu/handle_callbacks/invoice/released'
+# require 'jera_payment/services/iugu/handle_callbacks/invoice/status_changed'
+
+# IUGU SUBSCRIPTION CALLBACKS
+# require 'jera_payment/services/iugu/handle_callbacks/subscription/base'
+# require 'jera_payment/services/iugu/handle_callbacks/subscription/activated'
+# require 'jera_payment/services/iugu/handle_callbacks/subscription/changed'
+# require 'jera_payment/services/iugu/handle_callbacks/subscription/created'
+# require 'jera_payment/services/iugu/handle_callbacks/subscription/expired'
+# require 'jera_payment/services/iugu/handle_callbacks/subscription/renewed'
+# require 'jera_payment/services/iugu/handle_callbacks/subscription/suspended'
 
 # MODEL CONCERNS
 require 'jera_payment/models/concerns/resource_callbacks'
 require 'jera_payment/models/concerns/invoice_methods'
+require 'jera_payment/models/concerns/subscription_methods'

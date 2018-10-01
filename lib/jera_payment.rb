@@ -6,6 +6,8 @@ module JeraPayment
   autoload :CreditCard, 'jera_payment/models/credit_card.rb'
   autoload :Invoice, 'jera_payment/models/invoice.rb'
   autoload :Charge, 'jera_payment/models/charge.rb'
+  autoload :Plan, 'jera_payment/models/plan.rb'
+  autoload :Subscription, 'jera_payment/models/subscription.rb'
 
   mattr_accessor :api
   @@api = nil

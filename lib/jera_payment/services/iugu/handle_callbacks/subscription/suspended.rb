@@ -1,7 +1,7 @@
 module Iugu
   module HandleCallbacks
-    module Invoice
-      class Created < Iugu::HandleCallbacks::Invoice::Base
+    module Subscription
+      class Suspended < Iugu::HandleCallbacks::Subscription::Base
         def initialize(params)
           super
         end

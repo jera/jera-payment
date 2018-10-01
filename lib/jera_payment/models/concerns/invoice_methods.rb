@@ -35,6 +35,22 @@ module JeraPayment
         def has_create_callback?
           !self.duplicated
         end
+
+        def items=(value)
+          write_attribute(:items, value&.to_json)
+        end
+
+        def items
+          ActiveSupport::JSON.decode(self[:items]).map{ |item| item.deep_symbolize_keys } if self[:items]
+        end
+
+        def early_payment_discounts=(value)
+          write_attribute(:items, value&.to_json)
+        end
+
+        def early_payment_discounts
+          ActiveSupport::JSON.decode(self[:early_payment_discounts]).map{ |early_payment_discount| early_payment_discount.deep_symbolize_keys } if self[:early_payment_discounts]
+        end
       end
 
     end

@@ -1,7 +1,7 @@
 module JeraPayment
   class CallbacksController < JeraPaymentController
     def callback
-      status = eval("::JeraPayment::Services::#{api_name}::HandleCallbacks::#{format_event(params[:event])}.new(#{params}).call")
+      status = eval("#{api_name}::HandleCallbacks::#{format_event(params[:event])}.new(#{params}).call")
 
       render json: { status: status }, status: status
     end

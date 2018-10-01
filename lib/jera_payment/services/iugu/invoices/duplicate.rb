@@ -13,11 +13,11 @@ module JeraPayment
               ApplicationRecord.transaction do
                 iugu_invoice_duplicated = JeraPayment::Api::Iugu::Invoice.duplicate(@resource.api_id, @attributes)
 
-                raise iugu_invoice_duplicated[:errors] if iugu_invoice_duplicated[:errors].present?
+                raise(StandardError, iugu_invoice_duplicated[:errors]) if iugu_invoice_duplicated[:errors].present?
 
                 invoice_duplicated = set_new_invoice(iugu_invoice_duplicated)
 
-                raise invoice_duplicated[:errors] if invoice_duplicated[:errors].present?
+                raise(StandardError, invoice_duplicated[:errors]) if invoice_duplicated[:errors].present?
 
                 @resource = invoice_duplicated
               end
