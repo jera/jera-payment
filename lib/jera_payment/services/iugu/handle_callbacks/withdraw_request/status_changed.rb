@@ -1,7 +1,7 @@
 module Iugu
   module HandleCallbacks
     module WithdrawRequest
-      class Base
+      class StatusChanged
         def initialize(params)
           super
         end
