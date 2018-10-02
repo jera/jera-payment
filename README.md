@@ -10,6 +10,7 @@ It's composed for:
   * [Charge](#charges): model responsible for payment of invoices.
   * [Plan](#plans): model responsible for register the account plans.
   * [Subscription](#subscriptions): model responsible for register the subscriptions for plans.
+  * [SubAccount](#sub_accounts): model responsible for marketplace accounts.
 
 
 ## Getting started
@@ -60,7 +61,7 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
 | Attribute|    Type    | Description |
 |----------|------------|-------------|
 | customerable_id | BigInt | Your model's ID that has_one JeraPayment::Customer |
-| customerable_type | BigInt | Your model's name that has_one JeraPayment::Customer |
+| customerable_type | String | Your model's name that has_one JeraPayment::Customer |
 | api_id | String | Customer's API ID |
 | email | String | Customer email |
 | name | String | Customer name |
@@ -223,6 +224,46 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
 | active | Boolean | -- |
 | skip_charge | Boolean | -- |
 | credits | String | -- |
+
+## SubAccount
+
+> Model responsible for marketplace accounts.
+
+### Attributes
+
+| Attribute|    Type    | Description |
+|----------|------------|-------------|
+| account_id | String | SubAccount's API ID |
+| live_api_token | String | Token to production requests |
+| test_api_token | String | Token to development requests |
+| user_api_token | String | Token to some production requests |
+| current_household_id | BigInt | ID from default household |
+| sub_accountable_id | BigInt | Your model's ID that has_one JeraPayment::SubAccount |
+| sub_accountable_type | String | Your model's name that has_one JeraPayment::SubAccount |
+| name | String | -- |
+| comissions | Text (send as hash) | -- |
+| auto_withdrawal | Boolean | -- |
+| fines | Boolean | -- |
+| per_day_interest | Boolean | -- |
+| late_payment_fine | Int | -- |
+| auto_advance | Boolean | -- |
+| auto_advance_type | String | -- |
+| auto_advance_option | Int | -- |
+| bank_slip | Text (send as hash) | -- |
+| credit_card | Text (send as hash) | -- |
+| payment_email_notification | Boolean | -- |
+| payment_email_notification_receiver | String | -- |
+| early_payment_discount | Boolean | -- |
+| early_payment_discounts | Text (send as hash) | -- |
+| subscriptions_billing_days | Int | -- |
+| subscriptions_trial_period | Int | -- |
+| default_return_url | String | -- |
+| owner_emails_to_notify | String | -- |
+| resp_name | String | -- |
+| resp_cpf | String | -- |
+| can_receive? | Boolean | -- |
+| is_verified? | Boolean | -- |
+| last_verification_request_feedback | String | -- |
 
 
 ### Model Methods
@@ -411,6 +452,31 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
     ```ruby
     User.first.customer.subscriptions.first.remove_credits(credits)
     ```
+#### SUBACCOUNT
+  * CREATE
+    ```ruby
+    JeraPayment::SubAccount.create(SCHEMA_ATTRIBUTES)
+    ```
+    OR ( if you wanna link to your model (User) )
+    ```ruby
+    User.first.create_sub_account(SCHEMA_ATTRIBUTES)
+    ```
+  * UPDATE
+    ```ruby
+    JeraPayment::SubAccount.first.update(SCHEMA_ATTRIBUTES)
+    ```
+    OR ( if your customer is linked to a model record (User) )
+    ```ruby
+    User.first.sub_account.update(SCHEMA_ATTRIBUTES)
+    ```
+  * VERIFY
+    ```ruby
+    JeraPayment::SubAccount.first.verify(api_attributes) # This will create the household unless errors.present?
+    ```
+    OR ( if your customer is linked to a model record (User) )
+    ```ruby
+    User.first.sub_account.verify(attributes) # This will create the household unless errors.present?
+    ```
 
 
 ### API Methods
@@ -423,157 +489,179 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
 
   * INDEX
     ```ruby
-    JeraPayment::Api::Iugu::Customer.index(query = nil, access_token = nil) # query and access_token can be nil
+    JeraPayment::Api::Iugu::Customer.index(query = nil, access_token = nil) # query and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * SHOW
     ```ruby
-    JeraPayment::Api::Iugu::Customer.show(customer_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Customer.show(customer_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * CREATE
     ```ruby
-    JeraPayment::Api::Iugu::Customer.create(body, access_token = nil) # body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::Customer.create(body, access_token = nil) # body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * UPDATE
     ```ruby
-    JeraPayment::Api::Iugu::Customer.update(customer_api_id, body, access_token = nil) # body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::Customer.update(customer_api_id, body, access_token = nil) # body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * DESTROY
     ```ruby
-    JeraPayment::Api::Iugu::Customer.destroy(customer_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Customer.destroy(customer_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
 
 ##### PAYMENT TOKEN (First part for credit card creation)
 * CREATE
   ```ruby
-  JeraPayment::Api::Iugu::PaymentToken.create(body, access_token = nil) # body is HASH and access_token can be nil
+  JeraPayment::Api::Iugu::PaymentToken.create(body, access_token = nil) # body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
   ```
 
 ##### PAYMENT METHOD (Last part for credit card creation)
   * INDEX
     ```ruby
-    JeraPayment::Api::Iugu::PaymentMethod.index(customer_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::PaymentMethod.index(customer_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * SHOW
     ```ruby
-    JeraPayment::Api::Iugu::PaymentMethod.show(customer_api_id, payment_method_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::PaymentMethod.show(customer_api_id, payment_method_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * CREATE
     ```ruby
-    JeraPayment::Api::Iugu::PaymentMethod.create(customer_api_id, body, access_token = nil) # body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::PaymentMethod.create(customer_api_id, body, access_token = nil) # body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * UPDATE
     ```ruby
-    JeraPayment::Api::Iugu::PaymentMethod.update(customer_api_id, payment_method_api_id, body, access_token = nil) # body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::PaymentMethod.update(customer_api_id, payment_method_api_id, body, access_token = nil) # body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * DESTROY
     ```ruby
-    JeraPayment::Api::Iugu::PaymentMethod.destroy(customer_api_id, payment_method_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::PaymentMethod.destroy(customer_api_id, payment_method_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
 
 #### INVOICE
   * INDEX
     ```ruby
-    JeraPayment::Api::Iugu::Invoice.index(query = nil, access_token = nil) # query and access_token can be nil
+    JeraPayment::Api::Iugu::Invoice.index(query = nil, access_token = nil) # query and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * SHOW
     ```ruby
-    JeraPayment::Api::Iugu::Invoice.show(invoice_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Invoice.show(invoice_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * CREATE
     ```ruby
-    JeraPayment::Api::Iugu::Invoice.create(body, access_token = nil) # body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::Invoice.create(body, access_token = nil) # body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * DUPLICATE
     ```ruby
-    JeraPayment::Api::Iugu::Invoice.duplicate(invoice_api_id, body, access_token = nil) # body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::Invoice.duplicate(invoice_api_id, body, access_token = nil) # body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * CAPTURE
     ```ruby
-    JeraPayment::Api::Iugu::Invoice.capture(invoice_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Invoice.capture(invoice_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * CANCEL
     ```ruby
-    JeraPayment::Api::Iugu::Invoice.cancel(invoice_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Invoice.cancel(invoice_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * REFUND
     ```ruby
-    JeraPayment::Api::Iugu::Invoice.refund(invoice_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Invoice.refund(invoice_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * SEND EMAIL
     ```ruby
-    JeraPayment::Api::Iugu::Invoice.send_email(invoice_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Invoice.send_email(invoice_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
 
 #### CHARGE
   * CREATE
     ```ruby
-    JeraPayment::Api::Iugu::Charge.create(body, access_token = nil) # body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::Charge.create(body, access_token = nil) # body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
 
 ##### PLAN
   * INDEX
     ```ruby
-    JeraPayment::Api::Iugu::Plan.index(query = nil, access_token = nil) # query and access_token can be nil
+    JeraPayment::Api::Iugu::Plan.index(query = nil, access_token = nil) # query and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * SHOW
     ```ruby
-    JeraPayment::Api::Iugu::Plan.show(plan_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Plan.show(plan_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * CREATE
     ```ruby
-    JeraPayment::Api::Iugu::Plan.create(body, access_token = nil) # body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::Plan.create(body, access_token = nil) # body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * UPDATE
     ```ruby
-    JeraPayment::Api::Iugu::Plan.update(plan_api_id, body, access_token = nil) # body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::Plan.update(plan_api_id, body, access_token = nil) # body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * DESTROY
     ```ruby
-    JeraPayment::Api::Iugu::Plan.destroy(plan_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Plan.destroy(plan_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
 
 ##### SUBSCRIPTION
   * INDEX
     ```ruby
-    JeraPayment::Api::Iugu::Subscription.index(query = nil, access_token = nil) # query and access_token can be nil
+    JeraPayment::Api::Iugu::Subscription.index(query = nil, access_token = nil) # query and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * SHOW
     ```ruby
-    JeraPayment::Api::Iugu::Subscription.show(subscription_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Subscription.show(subscription_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * CREATE
     ```ruby
-    JeraPayment::Api::Iugu::Subscription.create(body, access_token = nil) # body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::Subscription.create(body, access_token = nil) # body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * UPDATE
     ```ruby
-    JeraPayment::Api::Iugu::Subscription.update(subscription_api_id, body, access_token = nil) # body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::Subscription.update(subscription_api_id, body, access_token = nil) # body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * DESTROY
     ```ruby
-    JeraPayment::Api::Iugu::Subscription.destroy(subscription_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Subscription.destroy(subscription_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * ACTIVATE
     ```ruby
-    JeraPayment::Api::Iugu::Subscription.activate(subscription_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Subscription.activate(subscription_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * SUSPEND
     ```ruby
-    JeraPayment::Api::Iugu::Subscription.suspend(subscription_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Subscription.suspend(subscription_api_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * CHANGE PLAN SIMULATION
     ```ruby
-    JeraPayment::Api::Iugu::Subscription.change_plan_simulation(subscription_api_id, plan_identifier, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Subscription.change_plan_simulation(subscription_api_id, plan_identifier, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * CHANGE PLAN
     ```ruby
-    JeraPayment::Api::Iugu::Subscription.change_plan(subscription_api_id, plan_identifier, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Subscription.change_plan(subscription_api_id, plan_identifier, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * ADD CREDITS
     ```ruby
-    JeraPayment::Api::Iugu::Subscription.add_credits(subscription_api_id, body, access_token = nil) #body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::Subscription.add_credits(subscription_api_id, body, access_token = nil) #body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
   * REMOVE CREDITS
     ```ruby
-    JeraPayment::Api::Iugu::Subscription.remove_credits(subscription_api_id, body, access_token = nil) #body is HASH and access_token can be nil
+    JeraPayment::Api::Iugu::Subscription.remove_credits(subscription_api_id, body, access_token = nil) #body is HASH and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
+    ```
+
+##### SUBACCOUNT
+  * LIST ACCOUNTS
+    ```ruby
+    JeraPayment::Api::Iugu::SubAccount.list_accounts(query = nil, access_token = nil) # query and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
+    ```
+  * SHOW
+    ```ruby
+    JeraPayment::Api::Iugu::SubAccount.show(sub_account_account_id, access_token) # access_token is live_api_token/test_api_token
+    ```
+  * CREATE
+    ```ruby
+    JeraPayment::Api::Iugu::SubAccount.create(body) # body is HASH
+    ```
+  * VERIFY
+    ```ruby
+    JeraPayment::Api::Iugu::SubAccount.verify(sub_account_account_id, body, access_token) # body is HASH and access_token is user_api_token
+    ```
+  * UPDATE
+    ```ruby
+    JeraPayment::Api::Iugu::SubAccount.update(sub_account_account_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
     ```
