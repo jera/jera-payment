@@ -9,6 +9,7 @@ It's composed for:
   * [Invoice](#invoices): model responsible for register the api invoices
   * [Charge](#charges): model responsible for payment of invoices.
   * [Plan](#plans): model responsible for register the account plans.
+  * [Subscription](#subscriptions): model responsible for register the subscriptions for plans.
 
 
 ## Getting started
@@ -31,6 +32,7 @@ Next, you need to run the installer. You can do it with this command:
 ~~~bash
 $ rails generate jera_payment:install
 ~~~
+
 That command will create the necessary migrations and the initialize file. The file will be like this:
 ```ruby
 #this is the intilizer
@@ -151,7 +153,7 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
 | invoice_id | BigInt | Your project's Invoice Id |
 | method | String | -- |
 | token | String | -- |
-| customer_payment_method_api_id | String | Your project's Credit Card Id |
+| customer_payment_method_api_id | String | Your API Credit Card Id |
 | restrict_payment_method | Boolean | -- |
 | customer_api_id | String | -- |
 | email | String | -- |
@@ -196,6 +198,31 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
 | value_cents | String | Plan's price in cents |
 | payable_with | String | Payment method disponible |
 | features | Text (send as hash) | -- |
+
+## Subscription
+
+> Model responsible for register the subscriptions for plans.
+
+### Attributes
+
+| Attribute|    Type    | Description |
+|----------|------------|-------------|
+| api_id | String | Subscription's API ID |
+| customer_id | BigInt | Your project's Subscription Id |
+| plan_identifier | String | Plan's identifier |
+| only_on_charge_success | Boolean | -- |
+| ignore_due_email | Boolean | -- |
+| payable_with | String | -- |
+| credits_based | Boolean | -- |
+| price_cents | Int | -- |
+| credits_cycle | Int | -- |
+| credits_min | Int | -- |
+| subitems | Text (send as hash) | -- |
+| custom_variables | Text (send as hash) | -- |
+| suspended | Boolean | -- |
+| active | Boolean | -- |
+| skip_charge | Boolean | -- |
+| credits | String | -- |
 
 
 ### Model Methods
@@ -311,6 +338,80 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
     ```ruby
     JeraPayment::Plan.first.destroy
     ```
+#### SUBSCRIPTION
+  * CREATE
+    ```ruby
+    JeraPayment::Subscription.create(SCHEMA_ATTRIBUTES)
+    ```
+    OR ( if you wanna link to your model (User) )
+    ```ruby
+    User.first.customer.subscriptions.create(SCHEMA_ATTRIBUTES)
+    ```
+  * UPDATE
+    ```ruby
+    JeraPayment::Subscription.first.update(SCHEMA_ATTRIBUTES)
+    ```
+    OR ( if your customer is linked to a model record (User) )
+    ```ruby
+    User.first.customer.subscriptions.first.update(SCHEMA_ATTRIBUTES)
+    ```
+  * DESTROY
+    ```ruby
+    JeraPayment::Subscription.first.destroy
+    ```
+    OR ( if your customer is linked to a model record (User) )
+    ```ruby
+    User.first.customer.subscriptions.first.destroy
+    ```
+  * ACTIVATE
+    ```ruby
+    JeraPayment::Subscription.first.activate
+    ```
+    OR ( if your customer is linked to a model record (User) )
+    ```ruby
+    User.first.customer.subscriptions.first.activate
+    ```
+  * SUSPEND
+    ```ruby
+    JeraPayment::Subscription.first.suspend
+    ```
+    OR ( if your customer is linked to a model record (User) )
+    ```ruby
+    User.first.customer.subscriptions.first.suspend
+    ```
+  * CHANGE PLAN SIMULATION
+    ```ruby
+    JeraPayment::Subscription.first.change_plan_simulation(plan_identifier)
+    ```
+    OR ( if your customer is linked to a model record (User) )
+    ```ruby
+    User.first.customer.subscriptions.first.change_plan_simulation(plan_identifier)
+    ```
+  * CHANGE PLAN
+    ```ruby
+    JeraPayment::Subscription.first.change_plan(plan_identifier)
+    ```
+    OR ( if your customer is linked to a model record (User) )
+    ```ruby
+    User.first.customer.subscriptions.first.change_plan(plan_identifier)
+    ```
+  * ADD CREDITS
+    ```ruby
+    JeraPayment::Subscription.first.add_credits(credits)
+    ```
+    OR ( if your customer is linked to a model record (User) )
+    ```ruby
+    User.first.customer.subscriptions.first.add_credits(credits)
+    ```
+  * REMOVE CREDITS
+    ```ruby
+    JeraPayment::Subscription.first.remove_credits(credits)
+    ```
+    OR ( if your customer is linked to a model record (User) )
+    ```ruby
+    User.first.customer.subscriptions.first.remove_credits(credits)
+    ```
+
 
 ### API Methods
   * All the access_token are only filth when using marketplace api token.
@@ -412,7 +513,7 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
 ##### PLAN
   * INDEX
     ```ruby
-    JeraPayment::Api::Iugu::Plan.index(plan_api_id, access_token = nil) # access_token can be nil
+    JeraPayment::Api::Iugu::Plan.index(query = nil, access_token = nil) # query and access_token can be nil
     ```
   * SHOW
     ```ruby
@@ -431,3 +532,48 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
     JeraPayment::Api::Iugu::Plan.destroy(plan_api_id, access_token = nil) # access_token can be nil
     ```
 
+##### SUBSCRIPTION
+  * INDEX
+    ```ruby
+    JeraPayment::Api::Iugu::Subscription.index(query = nil, access_token = nil) # query and access_token can be nil
+    ```
+  * SHOW
+    ```ruby
+    JeraPayment::Api::Iugu::Subscription.show(subscription_api_id, access_token = nil) # access_token can be nil
+    ```
+  * CREATE
+    ```ruby
+    JeraPayment::Api::Iugu::Subscription.create(body, access_token = nil) # body is HASH and access_token can be nil
+    ```
+  * UPDATE
+    ```ruby
+    JeraPayment::Api::Iugu::Subscription.update(subscription_api_id, body, access_token = nil) # body is HASH and access_token can be nil
+    ```
+  * DESTROY
+    ```ruby
+    JeraPayment::Api::Iugu::Subscription.destroy(subscription_api_id, access_token = nil) # access_token can be nil
+    ```
+  * ACTIVATE
+    ```ruby
+    JeraPayment::Api::Iugu::Subscription.activate(subscription_api_id, access_token = nil) # access_token can be nil
+    ```
+  * SUSPEND
+    ```ruby
+    JeraPayment::Api::Iugu::Subscription.suspend(subscription_api_id, access_token = nil) # access_token can be nil
+    ```
+  * CHANGE PLAN SIMULATION
+    ```ruby
+    JeraPayment::Api::Iugu::Subscription.change_plan_simulation(subscription_api_id, plan_identifier, access_token = nil) # access_token can be nil
+    ```
+  * CHANGE PLAN
+    ```ruby
+    JeraPayment::Api::Iugu::Subscription.change_plan(subscription_api_id, plan_identifier, access_token = nil) # access_token can be nil
+    ```
+  * ADD CREDITS
+    ```ruby
+    JeraPayment::Api::Iugu::Subscription.add_credits(subscription_api_id, body, access_token = nil) #body is HASH and access_token can be nil
+    ```
+  * REMOVE CREDITS
+    ```ruby
+    JeraPayment::Api::Iugu::Subscription.remove_credits(subscription_api_id, body, access_token = nil) #body is HASH and access_token can be nil
+    ```
