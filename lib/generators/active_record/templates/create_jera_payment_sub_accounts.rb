@@ -37,6 +37,3 @@ class CreateJeraPaymentSubAccounts < ActiveRecord::Migration<%= migration_versio
     end
   end
 end
-
-
-# ENVIAR NO UPDATE PUT

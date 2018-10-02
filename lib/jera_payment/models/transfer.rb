@@ -9,4 +9,12 @@ class JeraPayment::Transfer < ActiveRecord::Base
   belongs_to :sub_account, class_name: 'JeraPayment::SubAccount'
   belongs_to :receiver, class_name: 'JeraPayment::SubAccount'
 
+  def custom_variables=(value)
+    write_attribute(:custom_variables, value&.to_json)
+  end
+
+  def custom_variables
+    ActiveSupport::JSON.decode(self[:custom_variables]).map{ |item| item.deep_symbolize_keys } if self[:custom_variables]
+  end
+
 end

@@ -30,7 +30,6 @@ module JeraPayment
 
         def self.set_headers(account_access_token)
           return { 'Content-Type': 'application/json', 'Authorization': "Basic #{Base64.encode64(ensure_account_access_token(account_access_token))}" }
-          parse_response(response)
         end
 
         def self.ensure_account_access_token(account_access_token)

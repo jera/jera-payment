@@ -4,7 +4,7 @@ module JeraPayment
       class CreditCardParser
         def self.parse_payment_token(resource)
           {
-            account_id: JeraPayment.account_id,
+            account_id: resource&.customer&.sub_account&.present? ? resource&.customer&.sub_account&.account_id : JeraPayment.account_id,
             method: 'credit_card',
             test: resource.test,
             data: {

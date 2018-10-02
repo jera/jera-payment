@@ -1,6 +1,6 @@
-require 'enumerize'
-
 class JeraPayment::Invoice < ActiveRecord::Base
+  require 'enumerize'
+
   include JeraPayment::Concerns::ResourceCallbacks
   include JeraPayment::Concerns::InvoiceMethods
   extend Enumerize
@@ -21,5 +21,21 @@ class JeraPayment::Invoice < ActiveRecord::Base
   belongs_to :customer, class_name: 'JeraPayment::Customer', optional: true
 
   has_one :charge, class_name: 'JeraPayment::Charge'
+
+  def items=(value)
+    write_attribute(:items, value&.to_json)
+  end
+
+  def items
+    ActiveSupport::JSON.decode(self[:items]).map{ |item| item.deep_symbolize_keys } if self[:items]
+  end
+
+  def early_payment_discounts=(value)
+    write_attribute(:items, value&.to_json)
+  end
+
+  def early_payment_discounts
+    ActiveSupport::JSON.decode(self[:early_payment_discounts]).map{ |early_payment_discount| early_payment_discount.deep_symbolize_keys } if self[:early_payment_discounts]
+  end
 
 end

@@ -51,5 +51,3 @@ class CreateJeraPaymentInvoices < ActiveRecord::Migration<%= migration_version %
     end
   end
 end
-
-# (name: 'teste', email: 'teste@teste.com', due_date: '2018-10-01', items: [{ description: 'meu item', quantity: 1, price_cents: 100}], cpf_cnpj: '46091609866', zip_code: '79070-295', number: '725')

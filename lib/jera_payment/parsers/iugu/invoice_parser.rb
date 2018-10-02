@@ -16,7 +16,7 @@ module JeraPayment
             late_payment_fine: resource.late_payment_fine,
             per_day_interest: resource.per_day_interest,
             discount_cents: resource.discount_cents,
-            customer_id: JeraPayment::Customer.find_by(id: resource.customer_id),
+            customer_id: JeraPayment::Customer.find_by(id: resource.customer_id)&.api_id,
             ignore_due_email: resource.ignore_due_email,
             subscription_id: resource.subscription_api_id,
             payable_with: resource.payable_with,
