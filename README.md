@@ -10,7 +10,8 @@ It's composed for:
   * [Charge](#charges): model responsible for payment of invoices.
   * [Plan](#plans): model responsible for register the account plans.
   * [Subscription](#subscriptions): model responsible for register the subscriptions for plans.
-  * [SubAccount](#sub_accounts): model responsible for marketplace accounts.
+  * [SubAccount](#sub_accounts): model responsible for register marketplace accounts.
+  * [Household](#households): model responsible for households.
   * [Withdrawal](#withdrawals): model responsible for register sub accounts withdrawals.
   * [Transfer](#transfers): model responsible for register sub accounts transfers.
 
@@ -297,6 +298,24 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
 | amount_localized | String | -- |
 | custom_variables | Text (send as hash) | -- |
 
+## Household
+
+> Model responsible for register households.
+
+### Attributes
+
+| Attribute|    Type    | Description |
+|----------|------------|-------------|
+| sub_account_id | BigInt | Your project's SubAccount Id |
+| agency | String | -- |
+| account | String | -- |
+| account_type | Enumerize | -- |
+| bank | Enumerize | -- |
+| document | String | -- |
+| status | Enumerize | -- |
+| feedback | String | -- |
+| verification | Boolean | -- |
+
 
 ### Model Methods
   * The models are validate according to API.
@@ -530,6 +549,16 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
     User.first.sub_account.transfers.create(SCHEMA_ATTRIBUTES)
     ```
 
+#### HOUSEHOLD
+  * CREATE
+    ```ruby
+    JeraPayment::Household.create(SCHEMA_ATTRIBUTES)
+    ```
+    OR ( if you wanna link to your model (User) )
+    ```ruby
+    User.first.sub_account.households.create(SCHEMA_ATTRIBUTES)
+    ```
+
 ### API Methods
   * All the access_token are only filth when using marketplace api token.
   * All the arguments passed to the methods are directly send to Iugu's API.
@@ -743,4 +772,10 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
   * CREATE
     ```ruby
     JeraPayment::Api::Iugu::Transfer.create(body, access_token = nil) # body is HASH and access_token can be nil or live_api_token/test_api_token
+    ```
+
+##### HOUSEHOLD
+  * CREATE
+    ```ruby
+    JeraPayment::Api::Iugu::Household.create(body, access_token = nil) # body is HASH and access_token can be nil or live_api_token/test_api_token
     ```
