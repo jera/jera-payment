@@ -11,6 +11,8 @@ It's composed for:
   * [Plan](#plans): model responsible for register the account plans.
   * [Subscription](#subscriptions): model responsible for register the subscriptions for plans.
   * [SubAccount](#sub_accounts): model responsible for marketplace accounts.
+  * [Withdrawal](#withdrawals): model responsible for register sub accounts withdrawals.
+  * [Transfer](#transfers): model responsible for register sub accounts transfers.
 
 
 ## Getting started
@@ -209,7 +211,7 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
 | Attribute|    Type    | Description |
 |----------|------------|-------------|
 | api_id | String | Subscription's API ID |
-| customer_id | BigInt | Your project's Subscription Id |
+| customer_id | BigInt | Your project's Customer Id |
 | plan_identifier | String | Plan's identifier |
 | only_on_charge_success | Boolean | -- |
 | ignore_due_email | Boolean | -- |
@@ -264,6 +266,36 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
 | can_receive? | Boolean | -- |
 | is_verified? | Boolean | -- |
 | last_verification_request_feedback | String | -- |
+
+## Withdrawal
+
+> Model responsible for register sub accounts withdrawals.
+
+### Attributes
+
+| Attribute|    Type    | Description |
+|----------|------------|-------------|
+| api_id | String | Withdrawal's API ID |
+| sub_account_id | BigInt | Your project's SubAccount Id |
+| amount | Float | -- |
+| custom_variables | Text (send as has) | -- |
+| status | Enumerize | -- |
+| feedback | String | -- |
+
+## Transfer
+
+> Model responsible for register sub accounts transfers.
+
+### Attributes
+
+| Attribute|    Type    | Description |
+|----------|------------|-------------|
+| api_id | String | Withdrawal's API ID |
+| sub_account_id | BigInt | Your project's SubAccount Id |
+| receiver | String | Account's API ID |
+| amount_cents | Int | -- |
+| amount_localized | String | -- |
+| custom_variables | Text (send as hash) | -- |
 
 
 ### Model Methods
@@ -478,6 +510,25 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
     User.first.sub_account.verify(attributes) # This will create the household unless errors.present?
     ```
 
+#### WITHDRAWAL
+  * CREATE
+    ```ruby
+    JeraPayment::Withdrawal.create(SCHEMA_ATTRIBUTES)
+    ```
+    OR ( if you wanna link to your model (User) )
+    ```ruby
+    User.first.sub_account.withdrawals.create(SCHEMA_ATTRIBUTES)
+    ```
+
+#### TRANSFER
+  * CREATE
+    ```ruby
+    JeraPayment::Transfer.create(SCHEMA_ATTRIBUTES)
+    ```
+    OR ( if you wanna link to your model (User) )
+    ```ruby
+    User.first.sub_account.transfers.create(SCHEMA_ATTRIBUTES)
+    ```
 
 ### API Methods
   * All the access_token are only filth when using marketplace api token.
@@ -664,4 +715,32 @@ $ rails generate jera_payment MODEL_NAME Customer SubAccount
   * UPDATE
     ```ruby
     JeraPayment::Api::Iugu::SubAccount.update(sub_account_account_id, access_token = nil) # access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
+    ```
+
+##### WITHDRAWAL
+  * INDEX
+    ```ruby
+    JeraPayment::Api::Iugu::Withdrawal.index(query = nil, access_token = nil) # query and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
+    ```
+  * SHOW
+    ```ruby
+    JeraPayment::Api::Iugu::Withdrawal.show(withdrawal_api_id, access_token = nil) # access_token can be nil or live_api_token/test_api_token
+    ```
+  * REQUEST WITHDRAWAL
+    ```ruby
+    JeraPayment::Api::Iugu::Withdrawal.request_withdrawal(sub_account_account_id, body, access_token = nil) # body is HASH and access_token can be nil or live_api_token/test_api_token
+    ```
+
+##### TRANSFER
+  * INDEX
+    ```ruby
+    JeraPayment::Api::Iugu::Transfer.index(query = nil, access_token = nil) # query and access_token can be nil or sub_account.live_api_token/sub_account.test_api_token
+    ```
+  * SHOW
+    ```ruby
+    JeraPayment::Api::Iugu::Transfer.show(transfers_api_id, access_token = nil) # access_token can be nil or live_api_token/test_api_token
+    ```
+  * CREATE
+    ```ruby
+    JeraPayment::Api::Iugu::Transfer.create(body, access_token = nil) # body is HASH and access_token can be nil or live_api_token/test_api_token
     ```

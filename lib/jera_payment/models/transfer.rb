@@ -2,7 +2,7 @@ class JeraPayment::Transfer < ActiveRecord::Base
   include JeraPayment::Concerns::ResourceCallbacks
   include JeraPayment::Concerns::TransferMethods
 
-  attr_readonly
+  attr_readonly :api_id, :sub_account_id, :receiver, :amount_cents, :amount_localized, :custom_variables
 
   self.table_name = 'jera_payment_transfers'
 
