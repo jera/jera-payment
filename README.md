@@ -55,6 +55,16 @@ Then, you need to run the generator and inform the model to associate with custo
 $ rails generate jera_payment MODEL_NAME Customer SubAccount
 ~~~
 
+At last, add this lines to your application.rb file so your project can reach the handlecallbacks services that we inject:
+
+``` ruby
+config.autoload_paths += %W(#{config.root}/app)
+config.eager_load_paths += %W(#{config.root}/app)
+
+config.autoload_paths += %W(#{config.root}/lib/**/)
+config.autoload_paths += Dir["#{config.root}/lib/**/"]
+```
+
 ## Customer
 
 > Model responsible for register the api customers.
