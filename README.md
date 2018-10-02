@@ -27,11 +27,10 @@ Or install it yourself as:
 
     $ gem install jera-payment
 
-Next, you need to run the generator and inform the model to associate with customer/marketplace. You can do it with this command:
+Next, you need to run the installer. You can do it with this command:
 ~~~bash
-$> rails generate jera_payment MODEL_NAME
+$ rails generate jera_payment:install
 ~~~
-
 That command will create the necessary migrations and the initialize file. The file will be like this:
 ```ruby
 #this is the intilizer
@@ -44,6 +43,11 @@ JeraPayment.setup do |config|
   config.is_test = TRUE_OF_FALSE # boolean
 end
 ```
+
+Then, you need to run the generator and inform the model to associate with customer/marketplace. You can do it with this command:
+~~~bash
+$ rails generate jera_payment MODEL_NAME Customer SubAccount
+~~~
 
 ## Customer
 
