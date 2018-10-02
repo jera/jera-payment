@@ -3,10 +3,6 @@ module JeraPayment
     module Iugu
       module SubAccounts
         class Create < JeraPayment::Services::Iugu::Base
-          def initialize(resource)
-            super
-          end
-
           def call
             iugu_marketplace = JeraPayment::Api::Iugu::SubAccount.create(@attributes)
 

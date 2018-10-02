@@ -8,8 +8,7 @@ module JeraPayment
           end
 
           def call
-            iugu_subscription = eval("JeraPayment::Api::Iugu::Subscription.destroy(@resource.api_id,
-                                                                                   @resource&.customer&.sub_account&.api_token)")
+            iugu_subscription = JeraPayment::Api::Iugu::Subscription.destroy(@resource.api_id, @resource&.customer&.sub_account&.api_token)
 
             if iugu_subscription[:errors].present?
               add_error(iugu_subscription[:errors])

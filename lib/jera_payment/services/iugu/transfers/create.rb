@@ -3,13 +3,9 @@ module JeraPayment
     module Iugu
       module Transfer
         class Create < JeraPayment::Services::Iugu::Base
-          def initialize(resource)
-            super
-          end
-
           def call
             transfer_body = JeraPayment::Parsers::Iugu::TransferParser.parse_creation(@resource)
-            iugu_transfer = eval("JeraPayment::Api::Iugu::Transfer.create(transfer_body, @resource&.sub_account&.api_token)")
+            iugu_transfer = JeraPayment::Api::Iugu::Transfer.create(transfer_body, @resource&.sub_account&.api_token)
 
             if iugu_transfer[:errors].present?
               add_error(iugu_transfer[:errors])

@@ -11,8 +11,8 @@ module JeraPayment
           def call
             begin
               ApplicationRecord.transaction do
-                iugu_invoice_duplicated = eval("JeraPayment::Api::Iugu::Invoice.duplicate(@resource.api_id, @attributes,
-                                                                                          @resource&.customer&.sub_account&.api_token)")
+                iugu_invoice_duplicated = JeraPayment::Api::Iugu::Invoice.duplicate(@resource.api_id, @attributes,
+                                                                                    @resource&.customer&.sub_account&.api_token)
 
                 raise(StandardError, iugu_invoice_duplicated[:errors]) if iugu_invoice_duplicated[:errors].present?
 

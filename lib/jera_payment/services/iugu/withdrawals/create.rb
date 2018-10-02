@@ -3,13 +3,9 @@ module JeraPayment
     module Iugu
       module Withdrawals
         class Create < JeraPayment::Services::Iugu::Base
-          def initialize(resource)
-            super
-          end
-
           def call
-            iugu_withdrawal = eval("JeraPayment::Api::Iugu::Withdrawal.request_withdrawal(@resource&.sub_account&.account_id, @attributes,
-                                                                  @resource&.sub_account&.api_token)")
+            iugu_withdrawal = JeraPayment::Api::Iugu::Withdrawal.request_withdrawal(@resource&.sub_account&.account_id, @attributes,
+                                                                                    @resource&.sub_account&.api_token)
 
             if iugu_withdrawal[:errors].present?
               add_error(iugu_withdrawal[:errors])

@@ -2,11 +2,9 @@ module Iugu
   module HandleCallbacks
     module Referrals
       class BankVerification < Iugu::HandleCallbacks::Referrals::Base
-        def initialize(params)
-          super
-        end
-
         def call
+          super
+          
           @sub_account = SubAccount.find_by(account_id: @params["data"]["account_id"])
 
           return 404 unless @sub_account.present?

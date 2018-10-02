@@ -2,12 +2,8 @@ module Iugu
   module HandleCallbacks
     module WithdrawRequest
       class StatusChanged
-        def initialize(params)
-          super
-        end
-
         def call
-          Rails.logger.info("======> #{@params}")
+          super
 
           @withdrawal = JeraPayment::Withdrawal.find_by(api_id: @params["data"]["id"])
 

@@ -3,13 +3,8 @@ module JeraPayment
     module Iugu
       module Plans
         class Create < JeraPayment::Services::Iugu::Base
-          def initialize(resource)
-            super
-          end
-
           def call
-            iugu_plan = eval("JeraPayment::Api::Iugu::Plan.create(@attributes,
-                                                                  @resource&.sub_account&.api_token)")
+            iugu_plan = JeraPayment::Api::Iugu::Plan.create(@attributes, @resource&.sub_account&.api_token)
 
             if iugu_plan[:errors].present?
               add_error(iugu_plan[:errors])

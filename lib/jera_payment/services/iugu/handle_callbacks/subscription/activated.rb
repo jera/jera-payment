@@ -4,14 +4,6 @@ module JeraPayment
       module HandleCallbacks
         module Subscription
           class Activated < Iugu::HandleCallbacks::Subscription::Base
-            def initialize(params)
-              super
-            end
-
-            def call
-              super
-            end
-
           end
         end
       end

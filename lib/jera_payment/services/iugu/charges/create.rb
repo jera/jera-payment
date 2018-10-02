@@ -3,17 +3,12 @@ module JeraPayment
     module Iugu
       module Charges
         class Create < JeraPayment::Services::Iugu::Base
-          def initialize(resource)
-            super
-          end
-
           def call
             charge_body = JeraPayment::Parsers::Iugu::ChargeParser.charge_body(@resource)
             charge_body.merge!({ method: @resource.method}) if @resource.method.present?
             charge_body.merge!({ token: @resource.token}) if @resource.token.present?
 
-            iugu_charge = eval("JeraPayment::Api::Iugu::Charge.create(charge_body,
-                                                                      @resource&.invoice&.customer&.sub_account&.api_token)")
+            iugu_charge = JeraPayment::Api::Iugu::Charge.create(charge_body, @resource&.invoice&.customer&.sub_account&.api_token)
 
             if iugu_charge[:errors].present?
               add_error(iugu_charge[:errors])

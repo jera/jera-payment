@@ -3,10 +3,6 @@ module JeraPayment
     module Iugu
       module CreditCards
         class Create < JeraPayment::Services::Iugu::Base
-          def initialize(resource)
-            super
-          end
-
           def call
             credit_card_token = create_credit_card_token
 
@@ -23,8 +19,8 @@ module JeraPayment
 
           private
           def create_credit_card_token
-            eval("JeraPayment::Api::Iugu::PaymentToken.create(JeraPayment::Parsers::Iugu::CreditCardParser.parse_payment_token(@resource),
-                                                              @resource.customer&.sub_account&.api_token)")
+            JeraPayment::Api::Iugu::PaymentToken.create(JeraPayment::Parsers::Iugu::CreditCardParser.parse_payment_token(@resource),
+                                                        @resource.customer&.sub_account&.api_token)
           end
 
           def set_payment_token_attributes(credit_card_token)
