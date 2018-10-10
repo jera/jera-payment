@@ -16,7 +16,7 @@ module JeraPayment
           JeraPayment::Services::Iugu::Invoices::UpdateStatus.new(self, :refund).call
         end
 
-        def duplicate(attibutes = {})
+        def duplicate(attributes = {})
           JeraPayment::Services::Iugu::Invoices::Duplicate.new(self, attributes).call
         end
 

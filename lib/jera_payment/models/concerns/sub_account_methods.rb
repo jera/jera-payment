@@ -5,7 +5,7 @@ module JeraPayment
 
       included do
         def verify(attributes)
-          JeraPayment::Services::Iugu::SubAccounts::Verify.new(self, attibutes).call
+          JeraPayment::Services::Iugu::SubAccounts::Verify.new(self, attributes).call
         end
 
         def has_destroy_callback?

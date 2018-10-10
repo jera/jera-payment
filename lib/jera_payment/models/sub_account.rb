@@ -28,7 +28,7 @@ class JeraPayment::SubAccount < ActiveRecord::Base
   end
 
   def bank_slip=(value)
-    write_attribute(:items, value&.to_json)
+    write_attribute(:bank_slip, value&.to_json)
   end
 
   def bank_slip
@@ -36,7 +36,7 @@ class JeraPayment::SubAccount < ActiveRecord::Base
   end
 
   def credit_card=(value)
-    write_attribute(:items, value&.to_json)
+    write_attribute(:credit_card, value&.to_json)
   end
 
   def credit_card
@@ -44,7 +44,7 @@ class JeraPayment::SubAccount < ActiveRecord::Base
   end
 
   def early_payment_discounts=(value)
-    write_attribute(:items, value&.to_json)
+    write_attribute(:early_payment_discounts, value&.to_json)
   end
 
   def early_payment_discounts

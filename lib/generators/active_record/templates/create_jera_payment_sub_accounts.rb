@@ -1,16 +1,16 @@
 class CreateJeraPaymentSubAccounts < ActiveRecord::Migration<%= migration_version %>
   def change
-    create_table :jera_payment_subs_accounts do |t|
+    create_table :jera_payment_sub_accounts do |t|
 
       t.references :current_household
       t.references :sub_accountable, polymorphic: true, index: {name: 'index_jera_payment_sub_accounts_on_sub_accountable' }
       t.string :account_id
       t.string :live_api_token
       t.string :test_api_token
-      t.string :user_api_token
+      t.string :user_token
       t.string :name
       t.text :comissions
-      t.boolean :auto_withdrawal
+      t.boolean :auto_withdraw
       t.boolean :fines
       t.boolean :per_day_interest
       t.integer :late_payment_fine

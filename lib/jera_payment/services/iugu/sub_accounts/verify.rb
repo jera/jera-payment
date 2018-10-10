@@ -9,17 +9,11 @@ module JeraPayment
           end
 
           def call
-            begin
-              ApplicationRecord.transaction do
-                iugu_marketplace = JeraPayment::Api::Iugu::SubAccount.verify(@resource.account_id, @attributes, @resource.user_api_token)
+            iugu_marketplace = JeraPayment::Api::Iugu::SubAccount.verify(@resource.account_id, @attributes, @resource.user_token)
 
-                raise(StandardError, iugu_marketplace[:errors]) if iugu_marketplace[:errors].present?
+            add_error(iugu_marketplace[:errors]) and return @resource if iugu_marketplace[:errors].present?
 
-                set_api_attributes(iugu_marketplace)
-              end
-            rescue Exception => error
-              add_error(error.message)
-            end
+            set_api_attributes(iugu_marketplace)
 
             @resource
           end
@@ -33,9 +27,9 @@ module JeraPayment
           end
 
           def create_household
-            @resource.households.create(@attributes[:data].slice(:bank_ag, :bank_cc).merge({ verification: true,
-                                                                                             bank: JeraPayment::Household.to_enumerize(@attributes[:data][:bank]),
-                                                                                             account_type: JeraPayment::Household.to_enumerize(@attributes[:data][:account_type]) }))
+            @resource.households.create({ verification: true, agency: @attributes[:data][:bank_ag], account: @attributes[:data][:bank_cc],
+                                          bank: JeraPayment::Household.bank_to_enumerize(@attributes[:data][:bank]),
+                                          account_type: JeraPayment::Household.account_type_to_enumerize(@attributes[:data][:account_type]) })
           end
         end
       end

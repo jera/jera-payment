@@ -24,7 +24,7 @@ module JeraPayment
           end
 
           def set_payment_token_attributes(credit_card_token)
-            @resource.assign_attributes(brand: credit_card_token[:extra_info][:brand], number: credit_card_token[:extra_info][:display_number])
+            @resource.assign_attributes(brand: credit_card_token[:extra_info][:brand], number: credit_card_token[:extra_info][:display_number], cvv: nil)
           end
 
           def link_credit_card(credit_card_token_id)

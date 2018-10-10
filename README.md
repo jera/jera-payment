@@ -249,7 +249,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 | account_id | String | SubAccount's API ID |
 | live_api_token | String | Token to production requests |
 | test_api_token | String | Token to development requests |
-| user_api_token | String | Token to some production requests |
+| user_token | String | Token to some production requests |
 | current_household_id | BigInt | ID from default household |
 | sub_accountable_id | BigInt | Your model's ID that has_one JeraPayment::SubAccount |
 | sub_accountable_type | String | Your model's name that has_one JeraPayment::SubAccount |
@@ -749,7 +749,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```
   * VERIFY
     ```ruby
-    JeraPayment::Api::Iugu::SubAccount.verify(sub_account_account_id, body, access_token) # body is HASH and access_token is user_api_token
+    JeraPayment::Api::Iugu::SubAccount.verify(sub_account_account_id, body, access_token) # body is HASH and access_token is user_token
     ```
   * UPDATE
     ```ruby

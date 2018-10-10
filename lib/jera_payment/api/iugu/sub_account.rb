@@ -10,10 +10,9 @@ module JeraPayment
           response = post(url, body, access_token)
         end
 
-        def self.update(id, body = {}, access_token = nil)
-          url = "#{BASE_ENDPOINT}/#{id}"
-
-          response = put(url, body, access_token)
+        def self.update(body = {}, access_token = nil)
+          url = "#{BASE_ENDPOINT}/configuration"
+          response = post(url, body, access_token)
         end
 
         def self.verify(id, body = {}, access_token = nil)

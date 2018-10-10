@@ -10,7 +10,7 @@ class CreateJeraPaymentHouseholds < ActiveRecord::Migration<%= migration_version
       t.string :document
       t.integer :status
       t.string :feedback
-      t.boolean :verification, default: true
+      t.boolean :verification, default: false
 
       t.timestamps null: false
     end
