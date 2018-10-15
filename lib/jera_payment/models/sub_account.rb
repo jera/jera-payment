@@ -24,7 +24,7 @@ class JeraPayment::SubAccount < ActiveRecord::Base
   end
 
   def comissions
-    ActiveSupport::JSON.decode(self[:comissions]).map{ |item| item.deep_symbolize_keys } if self[:comissions]
+    ActiveSupport::JSON.decode(self[:comissions]) if self[:comissions]
   end
 
   def bank_slip=(value)
@@ -32,7 +32,7 @@ class JeraPayment::SubAccount < ActiveRecord::Base
   end
 
   def bank_slip
-    ActiveSupport::JSON.decode(self[:bank_slip]).map{ |early_payment_discount| early_payment_discount.deep_symbolize_keys } if self[:bank_slip]
+    ActiveSupport::JSON.decode(self[:bank_slip]) if self[:bank_slip]
   end
 
   def credit_card=(value)
@@ -40,7 +40,7 @@ class JeraPayment::SubAccount < ActiveRecord::Base
   end
 
   def credit_card
-    ActiveSupport::JSON.decode(self[:credit_card]).map{ |early_payment_discount| early_payment_discount.deep_symbolize_keys } if self[:credit_card]
+    ActiveSupport::JSON.decode(self[:credit_card]) if self[:credit_card]
   end
 
   def early_payment_discounts=(value)
@@ -48,6 +48,6 @@ class JeraPayment::SubAccount < ActiveRecord::Base
   end
 
   def early_payment_discounts
-    ActiveSupport::JSON.decode(self[:early_payment_discounts]).map{ |early_payment_discount| early_payment_discount.deep_symbolize_keys } if self[:early_payment_discounts]
+    ActiveSupport::JSON.decode(self[:early_payment_discounts]).map{ |early_payment_discounts| early_payment_discounts.deep_symbolize_keys } if self[:early_payment_discounts]
   end
 end

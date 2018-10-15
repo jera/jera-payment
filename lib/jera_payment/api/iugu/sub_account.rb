@@ -12,6 +12,7 @@ module JeraPayment
 
         def self.update(body = {}, access_token = nil)
           url = "#{BASE_ENDPOINT}/configuration"
+
           response = post(url, body, access_token)
         end
 

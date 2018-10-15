@@ -21,6 +21,7 @@ require 'jera_payment/parsers/iugu/invoice_parser'
 require 'jera_payment/parsers/iugu/charge_parser'
 require 'jera_payment/parsers/iugu/transfer_parser'
 require 'jera_payment/parsers/iugu/household_parser'
+require 'jera_payment/parsers/iugu/sub_account_parser'
 
 #SERVICES BASE
 require 'jera_payment/services/iugu/base'
