@@ -4,6 +4,7 @@ class CreateJeraPaymentInvoices < ActiveRecord::Migration<%= migration_version %
 
       t.string     :api_id
       t.belongs_to :customer
+      t.belongs_to :sub_account
       t.integer    :status
       t.string     :email
       t.string     :cc_emails
@@ -27,19 +28,7 @@ class CreateJeraPaymentInvoices < ActiveRecord::Migration<%= migration_version %
       t.integer    :credits
       t.boolean    :early_payment_discount, default: false
       t.text       :early_payment_discounts
-      t.string     :cpf_cnpj
-      t.string     :name
-      t.string     :phone_prefix
-      t.string     :phone
-      t.string     :email
-      t.string     :zip_code
-      t.string     :street
-      t.string     :number
-      t.string     :neighborhood
-      t.string     :city
-      t.string     :state
-      t.string     :country
-      t.string     :complement
+      t.text       :payer
       t.string     :paid_at
       t.string     :secure_url
       t.string     :digitable_line

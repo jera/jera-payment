@@ -2,6 +2,7 @@ class CreateJeraPaymentCharges < ActiveRecord::Migration<%= migration_version %>
   def change
     create_table :jera_payment_charges do |t|
       t.belongs_to :invoice
+      t.belongs_to :sub_account
       t.string     :method
       t.string     :token
       t.string     :customer_payment_method_api_id

@@ -9,9 +9,7 @@ class JeraPayment::Invoice < ActiveRecord::Base
                 :ensure_workday_due_date, :items, :total_cents, :discount_cents,
                 :payable_with, :return_url, :expired_url, :notification_url, :fines,
                 :late_payment_fine, :per_day_interest, :ignore_due_email, :subscription_api_id,
-                :credits, :early_payment_discount, :early_payment_discounts, :cpf_cnpj, :name,
-                :phone_prefix, :phone, :email, :zip_code, :street, :number, :neighborhood, :city,
-                :state, :country, :complement, :paid_at, :secure_url, :digitable_line, :barcode_data, :barcode
+                :credits, :early_payment_discount, :early_payment_discounts, :payer, :paid_at, :secure_url, :digitable_line, :barcode_data, :barcode
 
   self.table_name = 'jera_payment_invoices'
 
@@ -20,6 +18,8 @@ class JeraPayment::Invoice < ActiveRecord::Base
 
   belongs_to :customer, class_name: 'JeraPayment::Customer', optional: true
 
+  belongs_to :sub_account, class_name: 'JeraPayment::SubAccount', optional: true
+
   has_one :charge, class_name: 'JeraPayment::Charge'
 
   def items=(value)
@@ -27,7 +27,7 @@ class JeraPayment::Invoice < ActiveRecord::Base
   end
 
   def items
-    ActiveSupport::JSON.decode(self[:items]).map{ |item| item.deep_symbolize_keys } if self[:items]
+    ActiveSupport::JSON.decode(self[:items]) if self[:items]
   end
 
   def early_payment_discounts=(value)
@@ -36,6 +36,14 @@ class JeraPayment::Invoice < ActiveRecord::Base
 
   def early_payment_discounts
     ActiveSupport::JSON.decode(self[:early_payment_discounts]).map{ |early_payment_discount| early_payment_discount.deep_symbolize_keys } if self[:early_payment_discounts]
+  end
+
+  def payer=(value)
+    write_attribute(:payer, value&.to_json)
+  end
+
+  def payer
+    ActiveSupport::JSON.decode(self[:payer]) if self[:payer]
   end
 
 end

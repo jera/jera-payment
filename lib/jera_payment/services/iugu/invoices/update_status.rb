@@ -12,7 +12,7 @@ module JeraPayment
             begin
               ApplicationRecord.transaction do
                 status_update = eval("JeraPayment::Api::Iugu::Invoice.#{@method.to_s}(@resource.api_id,
-                                                                                      @resource&.customer&.sub_account&.api_token)")
+                                                                                      @resource&.sub_account&.api_token)")
                 if status_update[:errors].present?
                   raise(StandardError, status_update[:errors])
                 else

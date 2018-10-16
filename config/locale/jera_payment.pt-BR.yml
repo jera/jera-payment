@@ -177,19 +177,7 @@ pt-BR:
         early_payment_discounts: Configuração do desconto de pagamento antecipado
         secure_url: URL da fatura
         duplicated: Fatura duplicada
-        cpf_cnpj: CPF/CNPJ
-        name: Nome
-        phone_prefix: Prefixo do telefone
-        phone: Número do telefone
-        email: E-mail
-        zip_code: CEP
-        street: Rua
-        number: Número
-        neighborhood: Bairro
-        city: Cidade
-        state: Estado
-        country: País
-        complement: Complemento
+        payer: Pagante
       jera_payment/plan:
         name: Nome
         identifier: Identificador

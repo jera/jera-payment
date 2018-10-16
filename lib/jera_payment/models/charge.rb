@@ -9,6 +9,7 @@ class JeraPayment::Charge < ActiveRecord::Base
                 :neighborhood, :city, :state, :country, :complement, :url, :pdf, :identification
 
   belongs_to :invoice, class_name: 'JeraPayment::Invoice'
+  belongs_to :sub_account, class_name: 'JeraPayment::SubAccount'
 
   def has_update_callback?
     false
