@@ -12,4 +12,5 @@ class JeraPayment::Plan < ActiveRecord::Base
   def features
     ActiveSupport::JSON.decode(self[:features]).map{ |item| item.deep_symbolize_keys } if self[:features]
   end
+
 end
