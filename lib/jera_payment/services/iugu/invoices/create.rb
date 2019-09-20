@@ -19,7 +19,7 @@ module JeraPayment
           private
           def set_api_attributes(attributes)
             @resource.api_id = attributes[:id]
-            @resource.assign_attributes(attributes.slice(:total_cents, :secure_url)
+            @resource.assign_attributes(attributes.slice(:total_cents, :secure_url, :items)
                                                          .merge( { digitable_line: attributes[:bank_slip][:digitable_line],
                                                                    barcode_data: attributes[:bank_slip][:barcode_data],
                                                                    barcode: attributes[:bank_slip][:barcode] } ) )
