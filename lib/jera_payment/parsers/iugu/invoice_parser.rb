@@ -6,7 +6,7 @@ module JeraPayment
           {
             email: resource.email,
             cc_emails: resource.cc_emails,
-            due_date: resource.due_date.to_date.strftime("%Y/%m/%d/"),
+            due_date: resource.due_date,
             ensure_workday_due_date: resource.ensure_workday_due_date,
             items: resource.items,
             return_url: resource.return_url,
