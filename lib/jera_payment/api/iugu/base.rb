@@ -40,7 +40,11 @@ module JeraPayment
         end
 
         def self.parse_response(response)
-          response.parsed_response.deep_symbolize_keys
+          if response.is_a?(Array)
+            response.parsed_response.deep_symbolize_keys
+          else
+            response.parsed_response.map(&:deep_symbolize_keys)
+          end
         end
 
       end
