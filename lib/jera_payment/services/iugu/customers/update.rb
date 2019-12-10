@@ -7,7 +7,7 @@ module JeraPayment
             iugu_customer = JeraPayment::Api::Iugu::Customer.update(
               @resource.api_id,
               @attributes,
-              &.customer&.sub_account&.api_token
+              @resource&.sub_account&.api_token
             )
 
             if iugu_customer[:errors].present?
