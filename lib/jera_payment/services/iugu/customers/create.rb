@@ -18,7 +18,7 @@ module JeraPayment
           private
           def set_api_attributes(attributes)
             @resource.api_id = attributes[:id]
-            @resource.assign_attributes(attributes.slice(:email, :name, :phone, :cpf_cpnj))
+            @resource.assign_attributes(attributes.slice(:email, :name, :phone, :cpf_cpnj, :city, :state, :street, :number, :zip_code))
           end
         end
       end

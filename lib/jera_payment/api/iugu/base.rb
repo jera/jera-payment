@@ -1,6 +1,5 @@
 require 'base64'
 require 'json'
-require 'byebug'
 require 'httparty'
 
 module JeraPayment
@@ -41,7 +40,13 @@ module JeraPayment
         end
 
         def self.parse_response(response)
-          response.parsed_response.deep_symbolize_keys
+          if response.parsed_response.is_a?(Array) && response.parsed_response.first.is_a?(Hash)
+            response.parsed_response.map(&:deep_symbolize_keys)
+          elsif response.parsed_response.is_a?(Hash)
+            response.parsed_response.deep_symbolize_keys
+          else
+            response.parsed_response
+          end
         end
 
       end
