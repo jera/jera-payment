@@ -8,8 +8,12 @@ module JeraPayment
           response = post(BASE_ENDPOINT, body, access_token)
         end
 
-        def self.index(query = nil, access_token = nil)
-          response = get(BASE_ENDPOINT, query, access_token)
+        def self.index(limit = nil, start = nil, access_token = nil)
+          response = HTTParty.get(
+            "#{JeraPayment.iugu_base_url}/#{BASE_ENDPOINT}?limit=#{limit}&start=#{start}",
+            headers: set_headers(access_token),
+          )
+          parse_response(response)
         end
 
         def self.show(id, access_token = nil)
