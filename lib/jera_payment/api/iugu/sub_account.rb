@@ -28,10 +28,16 @@ module JeraPayment
           response = get(url, nil, access_token)
         end
 
-        def self.list_accounts(query = nil, access_token = nil)
+        def self.list_accounts(query = nil, limit = nil, start = nil, access_token = nil)
           url = 'marketplace'
-
-          response = get(url, query, access_token)
+          response = HTTParty.get(
+            "#{JeraPayment.iugu_base_url}/#{endpoint}",
+            headers: set_headers(access_token),
+            query: query,
+            limit: limit,
+            start: start,
+          )
+          parse_response(response)
         end
 
       end
