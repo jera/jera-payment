@@ -1,0 +1,243 @@
+pt-BR:
+  activerecord:
+    models:
+      jera_payment/transfer:
+        one: Transferência entre Subconta
+        other: Transferências entre Subcontas
+      jera_payment/household:
+        one: Conta bancária
+        other: Contas bancárias
+      jera_payment/withdrawal:
+        one: Saque
+        other: Saques
+      jera_payment/sub_account:
+        one: Subconta
+        other: Subcontas
+      jera_payment/customer:
+        one: Cliente
+        other: Clientes
+      jera_payment/invoice:
+        one: Fatura
+        other: Faturas
+      jera_payment/credit_card:
+        one: Cartão de crédito
+        other: Cartões de crédito
+      jera_payment/charge:
+        one: Cobrança
+        other: Cobranças
+    attributes:
+      jera_payment/transfer:
+        id: ID
+        api_id: API ID
+        api: API ID
+        sub_account: Subconta
+        sub_account_id: ID Subconta
+        receiver: Destinatário
+        receiver_id: ID Destinatário
+        amount_cents: Valor em centavos
+        amount_localized: Valor em reais
+        custom_variables: Variáveis customizadas
+      jera_payment/household:
+        id: ID
+        sub_account: Subconta
+        sub_account_id: ID Subconta
+        agency: Agência
+        account: Conta
+        account_type: Tipo de conta
+        bank: Banco
+        document: Documento
+        status: Situação
+        feedback: Feedback
+        verification: Criada na verificação?
+      jera_payment/withdrawal:
+        id: ID
+        api_id: API ID
+        api: API ID
+        amount: Valor
+        custom_variables: Variáveis customizadas
+        status: Situação
+        feedback: Feedback
+        sub_account: Subconta
+        sub_account_id: ID Subconta
+      jera_payment/sub_account:
+        id: ID
+        account_id: API ID
+        account: API ID
+        current_household: Conta bancária atual
+        current_household_id: ID Conta bancária atual
+        sub_accountable: Titular
+        name: Nome
+        comissions: Comissões
+        auto_withdrawal: Saque automático
+        fines: Multas
+        per_day_interest: Juros por dia de atraso
+        late_payment_fine: Valor da multa por atraso
+        auto_advance: Antecipação automática
+        auto_advance_type: Tipo de antecipação
+        auto_advance_option: Opção de antecipação
+        bank_slip: Boleto
+        credit_card: Cartão de crédito
+        payment_email_notification: Notificação de pagamento realizado
+        payment_email_notification_receiver: Email para notificação de pagamento realizado
+        early_payment_discount: Desconto por pagamento antecipado
+        early_payment_discounts: Configuração do desconto de pagamento antecipado
+        subscriptions_billing_days: Dias para criação de faturas para próximo ciclo
+        subscriptions_trial_period: Duração do período de teste (dias)
+        default_return_url:  URL para redirecionamento pós pagamento
+        owner_emails_to_notify: Emails que recem notificações da conta
+        resp_name: Nome do responsável
+        resp_cpf: CPF do responsável
+        can_receive?: Pode receber?
+        is_verified?: Verificado?
+        last_verification_request_feedback: Último feedback
+      jera_payment/customer:
+        id: ID
+        api_id: API ID
+        api: API ID
+        email: E-mail
+        name: Nome
+        customerable: Titular
+        current_credit_card: Cartão de crédito padrão
+        phone: Telefone
+        cpf_cnpj: CPF/CNPJ
+      jera_payment/credit_card:
+        id: ID
+        customer: Cliente
+        api_id: API ID
+        api: API ID
+        brand: Bandeira
+        number: Número
+        first_name: Primeiro nome
+        last_name: Sobrenome
+        cvv: CVV
+        month: Mês de expiração
+        year: Ano de expiração
+        description: Descrição
+        test: Cartão de teste
+      jera_payment/charge:
+        id: ID
+        invoice: Fatura
+        method: Método
+        token: Token
+        customer_payment_method_api_id: API ID do cartão de crédito do cliente
+        customer_payment_method_api: API ID do cartão de crédito do cliente
+        restrict_payment_method: Método de pagamento restrito
+        customer_api_id: API ID do cliente
+        customer_api: API ID do cliente
+        email: E-mail
+        months: Parcelas
+        discount_cents: Desconto em centavos
+        bank_slip_extra_days: Prazo para pagamento do boleto
+        keep_dunning: Manter cobrança
+        items: Items
+        cpf_cnpj: CPF/CNPJ
+        name: Nome
+        phone_prefix: Prefixo do telefone
+        phone: Número do telefone
+        email: E-mail
+        zip_code: CEP
+        street: Rua
+        number: Número
+        neighborhood: Bairro
+        city: Cidade
+        state: Estado
+        country: País
+        complement: Complemento
+        url: URL
+        pdf: PDF
+        identification: Identificação
+      jera_payment/invoice:
+        id: ID
+        api_id: API ID
+        api: API ID
+        customer: Cliente
+        status: Situação
+        email: E-mail
+        cc_emails: E-mails para cópia
+        due_date: Data de vencimento
+        ensure_workday_due_date: Vencimento apenas em dia de semana
+        items: Items
+        total_cents: Valor total em centavos
+        discount_cents: Desconto em centavos
+        payable_with: Pagável com
+        return_url: URL para redirecionamento pós pagamento
+        expired_url: URL para redirecionamento de fatura expirada
+        notification_url: Webhook de fatura
+        fines: Multa por atraso
+        late_payment_fine: Valor da multa por atraso
+        per_day_interest: Juros por dia de atraso
+        ignore_due_email: Ignorar email de vencimento
+        ignore_canceled_email: Ignorar email de cancelamento
+        current_fines_option: Multas iguais à fatura original
+        keep_early_payment_discount: Desconto de antecipação igual à fatura original
+        subscription_api_id: API ID da Assinatura
+        subscription_api: API ID da Assinatura
+        credits: Créditos
+        early_payment_discount: Desconto por pagamento antecipado
+        early_payment_discounts: Configuração do desconto de pagamento antecipado
+        secure_url: URL da fatura
+        duplicated: Fatura duplicada
+        payer: Pagante
+      jera_payment/plan:
+        name: Nome
+        identifier: Identificador
+        interval: Intervalo
+        interval_type: Tipo de intervalor
+        value_cents: Preço em centavos
+        payable_with: Pagável com
+        features: Features
+      jera_payment/subscription:
+        id: ID
+        api_id: ID na API
+        api: ID na API
+        customer_id: ID do cliente
+        customer: Cliente
+        plan_identifier: Identificador do plano
+        expires_at: Expira em
+        only_on_charge_success: Criar assinatura se cobrança bem sucedida
+        ignore_due_email: Ignorar email de vencimento
+        payable_with: Pagável com
+        credits_based: Baseada em créditos
+        price_cents: Preço em centavos de recarga
+        credits_cycle: Qtde de créditos adicionados por ciclo
+        credits_min: Quantidade de créditos para ativar ciclo
+        subitems: Items adicionais
+        custom_variables: Variáveis personalizadas
+  enumerize:
+    jera_payment/withdrawal:
+      status:
+        pending: Pendente
+        processing: Processando
+        accepted: Aceito
+        rejected: Recusado
+    jera_payment/household:
+      account_type:
+        checking: Corrente
+        savings: Poupança
+      bank:
+        itau: Itaú
+        bradesco: Bradesco
+        caixa_economica: Caixa Econômica
+        banco_do_brasil: Banco do Brasil
+        santander: Santander
+        banrisul: Banrisul
+        sicredi: Sicredi
+        sicoob: Sicoob
+        inter: Inter
+        brb: BRB
+      status:
+        pending: Pendente
+        accepted: Aceito
+        rejected: Recusado
+    jera_payment/invoice:
+      status:
+        pending: Pendente
+        paid: Paga
+        canceled: Cancelada
+        partially_paid: Paga parcialmente
+        refunded: Reembolsada
+        expired: Expirada
+        authorized: Autorizada
+        in_protest: Em protesto
+        chargeback: Estornada
+        in_analysis: Em análise
