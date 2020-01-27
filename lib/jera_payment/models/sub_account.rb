@@ -12,7 +12,7 @@ class JeraPayment::SubAccount < ActiveRecord::Base
   has_many :invoices, class_name: 'JeraPayment::Invoice'
   has_many :charges, class_name: 'JeraPayment::Charge'
 
-  belongs_to :sub_accountable, polymorphic: true
+  belongs_to :sub_accountable, polymorphic: true, optional: true
   belongs_to :current_household, class_name: 'JeraPayment::Household', foreign_key: :current_household_id, optional: true
 
   def api_token
