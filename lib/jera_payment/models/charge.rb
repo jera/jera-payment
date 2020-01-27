@@ -5,7 +5,7 @@ class JeraPayment::Charge < ActiveRecord::Base
 
   attr_readonly :invoice_id, :method, :token, :customer_payment_method_id, :restrict_payment_method,
                 :customer_id, :email, :months, :discount_cents, :bank_slip_extra_days, :keep_dunning,
-                :items, :cpf_cnpj, :name, :phone_prefix, :phone, :email, :zip_code, :street, :number,
+                :items, :cpf_cnpj, :name, :phone_prefix, :phone, :zip_code, :street, :number,
                 :neighborhood, :city, :state, :country, :complement, :url, :pdf, :identification
 
   belongs_to :invoice, class_name: 'JeraPayment::Invoice'
