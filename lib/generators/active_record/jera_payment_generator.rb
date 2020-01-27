@@ -45,16 +45,15 @@ module ActiveRecord
         migration_template "create_jera_payment_transfers.rb", "db/migrate/create_jera_payment_transfers.rb", migration_version: migration_version
       end
 
-      def rails5?
-        Rails.version.start_with? '5'
+      def rails5_and_up?
+        Rails::VERSION::MAJOR >= 5
       end
 
       def migration_version
-       if rails5?
-         "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
-       end
-     end
-
+        if rails5_and_up?
+          "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
+        end
+      end
     end
   end
 end

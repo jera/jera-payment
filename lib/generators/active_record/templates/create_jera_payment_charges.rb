@@ -18,7 +18,6 @@ class CreateJeraPaymentCharges < ActiveRecord::Migration<%= migration_version %>
       t.string     :name
       t.string     :phone_prefix
       t.string     :phone
-      t.string     :email
       t.string     :zip_code
       t.string     :street
       t.string     :number
