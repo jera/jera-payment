@@ -1,19 +1,20 @@
 ![Jera Logo](http://jera.com.br/images/logo-jera-header.png)
 
-JeraPayment makes integrations with Iugu, MercadoPago and Pagar.me API's.
+JeraPayment helps you use Iugu, MercadoPago and Pagar.me API's in a simple and fast way.
+It helps you integrate those API's into your application using a layer of abstraction for it's core objects.
 
-It's composed for:
+It's composed of:
 
-  * [Customer](#customers): model responsible for register the api customers.
-  * [CreditCard](#credit_cards): model responsible for register the customers payment methods.
-  * [Invoice](#invoices): model responsible for register the api invoices
-  * [Charge](#charges): model responsible for payment of invoices.
-  * [Plan](#plans): model responsible for register the account plans.
-  * [Subscription](#subscriptions): model responsible for register the subscriptions for plans.
-  * [SubAccount](#sub_accounts): model responsible for register marketplace accounts.
+  * [Customer](#customers): model responsible for registering api customers.
+  * [CreditCard](#credit_cards): model responsible for registering customer's payment methods.
+  * [Invoice](#invoices): model responsible for registering api invoices.
+  * [Charge](#charges): model responsible for invoice's payment charge.
+  * [Plan](#plans): model responsible for registering account's plans.
+  * [Subscription](#subscriptions): model responsible for registering plan's subscriptions.
+  * [SubAccount](#sub_accounts): model responsible for registering marketplace's accounts.
   * [Household](#households): model responsible for households.
-  * [Withdrawal](#withdrawals): model responsible for register sub accounts withdrawals.
-  * [Transfer](#transfers): model responsible for register sub accounts transfers.
+  * [Withdrawal](#withdrawals): model responsible for registering sub account withdrawals.
+  * [Transfer](#transfers): model responsible for registering sub account transfers.
 
 
 ## Getting started
@@ -32,15 +33,15 @@ Or install it yourself as:
 
     $ gem install jera-payment
 
-Next, you need to run the installer. You can do it with this command:
+Next, run the installer. You can do it with this command:
 ~~~bash
 $ rails generate jera_payment:install
 ~~~
 
-That command will create the necessary migrations and the initialize file. The file will be like this:
+That command will create the necessary migrations and the initialization file. It will be like this:
 ```ruby
 #this is the intilizer
-#here you will set up the jera payment configuration
+#here you will set up jera payments configuration
 JeraPayment.setup do |config|
   config.api = 'YOUR_API' # :pagar_me, :iugu, :mercado_pago
   config.api_key = 'YOUR_PRODUCTION_API_KEY' # string
@@ -50,7 +51,7 @@ JeraPayment.setup do |config|
 end
 ```
 
-Then, you need to run the generator and inform the model to associate with customer/marketplace. You can do it with this command:
+Then, run the generator and pass the model to associate with a customer/marketplace. You can do it like this:
 ~~~bash
 $ rails generate jera_payment MODEL_NAME Customer SubAccount
 ~~~
@@ -67,7 +68,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
 ## Customer
 
-> Model responsible for register the api customers.
+> Model responsible for registering api customers.
 
 ### Attributes
 
@@ -84,7 +85,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
 ## CreditCard
 
-> Model responsible for register the customers payment methods.
+> Model responsible for registering customer's payment methods.
 
 ### Attributes
 
@@ -104,7 +105,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
 ## Invoice
 
-> Model responsible for register the api invoices
+> Model responsible for registering the api invoices.
 
 ### Attributes
 
@@ -158,7 +159,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
 ## Charge
 
-> Model responsible for register the payment.
+> Model responsible for invoice's payment charge.
 
 ### Attributes
 
@@ -198,7 +199,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
 ## Plan
 
-> Model responsible for register the account plans.
+> Model responsible for registering account's plans.
 
 ### Attributes
 
@@ -215,7 +216,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
 ## Subscription
 
-> Model responsible for register the subscriptions for plans.
+> Model responsible for registering subscription's plans.
 
 ### Attributes
 
@@ -280,7 +281,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
 ## Withdrawal
 
-> Model responsible for register sub accounts withdrawals.
+> Model responsible for registering sub account withdrawals.
 
 ### Attributes
 
@@ -295,7 +296,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
 ## Transfer
 
-> Model responsible for register sub accounts transfers.
+> Model responsible for registering sub accounts transfers.
 
 ### Attributes
 
@@ -310,7 +311,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
 ## Household
 
-> Model responsible for register households.
+> Model responsible for registering households.
 
 ### Attributes
 
@@ -328,15 +329,15 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
 
 ### Model Methods
-  * The models are validate according to API.
-  * Most of the actions are send to the api before creating a record (those that aren't will be warned).
+  * The models are validated according it's API.
+  * Most of the actions are sent to the api before creating a record (those that aren't will be warned).
 
 #### CUSTOMER
   * CREATE
     ```ruby
     JeraPayment::Customer.create(SCHEMA_ATTRIBUTES)
     ```
-    OR ( if you wanna link to your model (User) )
+    OR ( if you want to link your user model )
     ```ruby
     User.first.create_customer(SCHEMA_ATTRIBUTES)
     ```
@@ -344,7 +345,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Customer.first.update(SCHEMA_ATTRIBUTES)
     ```
-    OR ( if your customer is linked to a model record (User) )
+    OR ( if your customer is linked to a user record )
     ```ruby
     User.first.customer.update(SCHEMA_ATTRIBUTES)
     ```
@@ -352,7 +353,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Customer.first.destroy
     ```
-    OR ( if your customer is linked to a model record (User) )
+    OR ( if your customer is linked to a user record )
     ```ruby
     User.first.customer.destroy
     ```
@@ -376,7 +377,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Invoice.create(SCHEMA_ATTRIBUTES)
     ```
-    OR ( if you wanna link to your model (User) )
+    OR ( if you wanna link to your user model )
     ```ruby
     User.first.customer.invoices.create(SCHEMA_ATTRIBUTES)
     ```
@@ -384,7 +385,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Invoice.first.cancel
     ```
-    OR ( if you wanna link to your model (User) )
+    OR ( if you wanna link to your user model )
     ```ruby
     User.first.customer.invoices.first.cancel
     ```
@@ -392,7 +393,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Invoice.first.capture
     ```
-    OR ( if you wanna link to your model (User) )
+    OR ( if you wanna link to your user model )
     ```ruby
     User.first.customer.invoices.first.capture
     ```
@@ -400,23 +401,23 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Invoice.first.refund
     ```
-    OR ( if you wanna link to your model (User) )
+    OR ( if you wanna link to your user model )
     ```ruby
     User.first.customer.invoices.first.refund
     ```
   * DUPLICATE
     ```ruby
-    JeraPayment::Invoice.first.duplicate(attributes) # attributes is HASH
+    JeraPayment::Invoice.first.duplicate(attributes) # attributes is a HASH
     ```
-    OR ( if you wanna link to your model (User) )
+    OR ( if you wanna link to your user model )
     ```ruby
-    User.first.customer.invoices.first.duplicate(attributes) # attributes is HASH
+    User.first.customer.invoices.first.duplicate(attributes) # attributes is a HASH
     ```
   * SEND EMAIL
     ```ruby
     JeraPayment::Invoice.first.send_email
     ```
-    OR ( if you wanna link to your model (User) )
+    OR ( if you wanna link to your user model )
     ```ruby
     User.first.customer.invoices.first.send_email
     ```
@@ -445,7 +446,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Subscription.create(SCHEMA_ATTRIBUTES)
     ```
-    OR ( if you wanna link to your model (User) )
+    OR ( if you wanna link to your user model )
     ```ruby
     User.first.customer.subscriptions.create(SCHEMA_ATTRIBUTES)
     ```
@@ -453,7 +454,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Subscription.first.update(SCHEMA_ATTRIBUTES)
     ```
-    OR ( if your customer is linked to a model record (User) )
+    OR ( if your customer is linked to a user record )
     ```ruby
     User.first.customer.subscriptions.first.update(SCHEMA_ATTRIBUTES)
     ```
@@ -461,7 +462,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Subscription.first.destroy
     ```
-    OR ( if your customer is linked to a model record (User) )
+    OR ( if your customer is linked to a user record )
     ```ruby
     User.first.customer.subscriptions.first.destroy
     ```
@@ -469,7 +470,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Subscription.first.activate
     ```
-    OR ( if your customer is linked to a model record (User) )
+    OR ( if your customer is linked to a user record )
     ```ruby
     User.first.customer.subscriptions.first.activate
     ```
@@ -477,7 +478,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Subscription.first.suspend
     ```
-    OR ( if your customer is linked to a model record (User) )
+    OR ( if your customer is linked to a user record )
     ```ruby
     User.first.customer.subscriptions.first.suspend
     ```
@@ -485,7 +486,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Subscription.first.change_plan_simulation(plan_identifier)
     ```
-    OR ( if your customer is linked to a model record (User) )
+    OR ( if your customer is linked to a user record )
     ```ruby
     User.first.customer.subscriptions.first.change_plan_simulation(plan_identifier)
     ```
@@ -493,7 +494,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Subscription.first.change_plan(plan_identifier)
     ```
-    OR ( if your customer is linked to a model record (User) )
+    OR ( if your customer is linked to a user record )
     ```ruby
     User.first.customer.subscriptions.first.change_plan(plan_identifier)
     ```
@@ -501,7 +502,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Subscription.first.add_credits(credits)
     ```
-    OR ( if your customer is linked to a model record (User) )
+    OR ( if your customer is linked to a user record )
     ```ruby
     User.first.customer.subscriptions.first.add_credits(credits)
     ```
@@ -509,7 +510,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Subscription.first.remove_credits(credits)
     ```
-    OR ( if your customer is linked to a model record (User) )
+    OR ( if your customer is linked to a user record )
     ```ruby
     User.first.customer.subscriptions.first.remove_credits(credits)
     ```
@@ -518,7 +519,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::SubAccount.create(SCHEMA_ATTRIBUTES)
     ```
-    OR ( if you wanna link to your model (User) )
+    OR ( if you wanna link to your user model )
     ```ruby
     User.first.create_sub_account(SCHEMA_ATTRIBUTES)
     ```
@@ -526,7 +527,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::SubAccount.first.update(SCHEMA_ATTRIBUTES)
     ```
-    OR ( if your customer is linked to a model record (User) )
+    OR ( if your customer is linked to a user record )
     ```ruby
     User.first.sub_account.update(SCHEMA_ATTRIBUTES)
     ```
@@ -534,7 +535,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::SubAccount.first.verify(api_attributes) # This will create the household unless errors.present?
     ```
-    OR ( if your customer is linked to a model record (User) )
+    OR ( if your customer is linked to a user record )
     ```ruby
     User.first.sub_account.verify(attributes) # This will create the household unless errors.present?
     ```
@@ -544,7 +545,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Withdrawal.create(SCHEMA_ATTRIBUTES)
     ```
-    OR ( if you wanna link to your model (User) )
+    OR ( if you wanna link to your user model )
     ```ruby
     User.first.sub_account.withdrawals.create(SCHEMA_ATTRIBUTES)
     ```
@@ -554,7 +555,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Transfer.create(SCHEMA_ATTRIBUTES)
     ```
-    OR ( if you wanna link to your model (User) )
+    OR ( if you wanna link to your user model )
     ```ruby
     User.first.sub_account.transfers.create(SCHEMA_ATTRIBUTES)
     ```
@@ -564,14 +565,14 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     ```ruby
     JeraPayment::Household.create(SCHEMA_ATTRIBUTES)
     ```
-    OR ( if you wanna link to your model (User) )
+    OR ( if you wanna link to your user model )
     ```ruby
     User.first.sub_account.households.create(SCHEMA_ATTRIBUTES)
     ```
 
 ### API Methods
   * All the access_token are only filth when using marketplace api token.
-  * All the arguments passed to the methods are directly send to Iugu's API.
+  * All arguments passed to methods are directly send to Iugu's API.
 
 #### IUGU
 
