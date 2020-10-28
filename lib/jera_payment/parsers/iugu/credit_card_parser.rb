@@ -21,7 +21,7 @@ module JeraPayment
           {
             token: credit_card_token_id,
             description: resource.description,
-            set_as_default: true
+            set_as_default: 'false'
           }
         end
       end

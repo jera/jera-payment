@@ -7,10 +7,4 @@ class JeraPayment::CreditCard < ActiveRecord::Base
 
   belongs_to :customer, class_name: 'JeraPayment::Customer'
 
-  after_create :set_as_default
-
-  def set_as_default
-    self.customer.update_column(:current_credit_card_id, self.id)
-  end
-
 end
