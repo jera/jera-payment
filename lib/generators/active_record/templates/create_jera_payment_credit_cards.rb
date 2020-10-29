@@ -13,6 +13,7 @@ class CreateJeraPaymentCreditCards < ActiveRecord::Migration<%= migration_versio
       t.string     :year
       t.string     :description
       t.boolean    :test
+      t.string     :set_as_default
 
       t.timestamps null: false
     end

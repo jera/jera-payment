@@ -1,4 +1,4 @@
-![Jera Logo](http://jera.com.br/images/logo-jera-header.png)
+![Jera Logo](https://jera.com.br/images/logo-jera-dark.svg)
 
 JeraPayment helps you use Iugu, MercadoPago and Pagar.me API's in a simple and fast way.
 It helps you integrate those API's into your application using a layer of abstraction for it's core objects.
@@ -102,6 +102,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 | year | String | Credit Card's year expiration |
 | description | String | Credit Card's description |
 | test | Boolean | Credit Card is test? |
+| set_as_default | String | Boolean but need to send as string |
 
 ## Invoice
 

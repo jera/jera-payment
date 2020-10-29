@@ -28,10 +28,11 @@ module JeraPayment
           end
 
           def link_credit_card(credit_card_token_id)
-            puts "\n---------> set_payment_token_attributes\n"
-            eval("JeraPayment::Api::Iugu::PaymentMethod.create(@resource.customer.api_id,
-                                                              JeraPayment::Parsers::Iugu::CreditCardParser.parse_payment_method(@resource, credit_card_token_id),
-                                                              @resource.customer&.sub_account&.api_token)")
+            JeraPayment::Api::Iugu::PaymentMethod.create(
+              @resource.customer.api_id,
+              JeraPayment::Parsers::Iugu::CreditCardParser.parse_payment_method(@resource, credit_card_token_id),
+              @resource.customer&.sub_account&.api_token
+            )
           end
 
         end
