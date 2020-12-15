@@ -120,6 +120,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 | cc_emails | String | -- |
 | ensure_workday_due_date | Boolean | -- |
 | items | Text (send as hash) | -- |
+| comissions | Text (send as hash) | -- |
 | total_cents | Int | -- |
 | discount_cents | Int | -- |
 | payable_with | String | -- |
