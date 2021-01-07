@@ -67,7 +67,7 @@ pt-BR:
         current_household_id: ID Conta bancária atual
         sub_accountable: Titular
         name: Nome
-        comissions: Comissões
+        commissions: Comissões
         auto_withdrawal: Saque automático
         fines: Multas
         per_day_interest: Juros por dia de atraso
@@ -157,7 +157,7 @@ pt-BR:
         due_date: Data de vencimento
         ensure_workday_due_date: Vencimento apenas em dia de semana
         items: Itens
-        comissions: Comições
+        commissions: Comições
         total_cents: Valor total em centavos
         discount_cents: Desconto em centavos
         payable_with: Pagável com

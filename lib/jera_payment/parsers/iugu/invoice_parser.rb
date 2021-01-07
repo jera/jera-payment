@@ -9,7 +9,7 @@ module JeraPayment
             due_date: resource.due_date,
             ensure_workday_due_date: resource.ensure_workday_due_date,
             items: resource.items,
-            comissions: resource.comissions,
+            commissions: resource.commissions,
             return_url: resource.return_url,
             expired_url: resource.expired_url,
             notification_url: resource.notification_url,

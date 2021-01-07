@@ -120,7 +120,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 | cc_emails | String | -- |
 | ensure_workday_due_date | Boolean | -- |
 | items | Text (send as hash) | -- |
-| comissions | Text (send as hash) | -- |
+| commissions | Text (send as hash) | -- |
 | total_cents | Int | -- |
 | discount_cents | Int | -- |
 | payable_with | String | -- |
@@ -256,7 +256,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
 | sub_accountable_id | BigInt | Your model's ID that has_one JeraPayment::SubAccount |
 | sub_accountable_type | String | Your model's name that has_one JeraPayment::SubAccount |
 | name | String | -- |
-| comissions | Text (send as hash) | -- |
+| commissions | Text (send as hash) | -- |
 | auto_withdrawal | Boolean | -- |
 | fines | Boolean | -- |
 | per_day_interest | Boolean | -- |

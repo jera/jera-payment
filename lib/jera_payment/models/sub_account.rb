@@ -19,12 +19,12 @@ class JeraPayment::SubAccount < ActiveRecord::Base
     JeraPayment.is_test ? self.test_api_token : self.live_api_token
   end
 
-  def comissions=(value)
-    write_attribute(:comissions, value&.to_json)
+  def commissions=(value)
+    write_attribute(:commissions, value&.to_json)
   end
 
-  def comissions
-    ActiveSupport::JSON.decode(self[:comissions]) if self[:comissions]
+  def commissions
+    ActiveSupport::JSON.decode(self[:commissions]) if self[:commissions]
   end
 
   def bank_slip=(value)

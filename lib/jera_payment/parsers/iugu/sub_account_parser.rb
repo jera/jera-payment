@@ -4,7 +4,7 @@ module JeraPayment
       class SubAccountParser
         def self.parse_account_configuration(resource)
           {
-            comissions: resource.comissions,
+            commissions: resource.commissions,
             auto_withdraw: resource.auto_withdraw,
             fines: resource.fines,
             per_day_interest: resource.per_day_interest,

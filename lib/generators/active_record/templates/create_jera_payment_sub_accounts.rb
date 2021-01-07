@@ -9,7 +9,7 @@ class CreateJeraPaymentSubAccounts < ActiveRecord::Migration<%= migration_versio
       t.string :test_api_token
       t.string :user_token
       t.string :name
-      t.text :comissions
+      t.text :commissions
       t.boolean :auto_withdraw
       t.boolean :fines
       t.boolean :per_day_interest

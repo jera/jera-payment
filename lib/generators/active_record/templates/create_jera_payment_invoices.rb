@@ -11,7 +11,7 @@ class CreateJeraPaymentInvoices < ActiveRecord::Migration<%= migration_version %
       t.string     :due_date
       t.boolean    :ensure_workday_due_date
       t.text       :items
-      t.text       :comissions
+      t.text       :commissions
       t.integer    :total_cents
       t.integer    :discount_cents
       t.string     :payable_with
