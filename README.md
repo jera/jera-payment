@@ -22,7 +22,7 @@ It's composed of:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'jera-payment'
+gem 'jera_payment'
 ```
 
 And then execute:
@@ -31,7 +31,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install jera-payment
+    $ gem install jera_payment
 
 Next, run the installer. You can do it with this command:
 ~~~bash
