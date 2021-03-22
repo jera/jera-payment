@@ -35,11 +35,11 @@ module JeraPayment
 
             invoice_duplicated.api_id = iugu_invoice_duplicated[:id]
 
-            invoice_duplicated.assign_attributes(iugu_invoice_duplicated.slice(:total_cents, :secure_url, :digitable_line,
-                                                                               :barcode_data, :barcode, :items, :commissions,
-                                                                               :ignore_due_email, :ignore_canceled_email,
-                                                                               :current_fines_option, :keep_early_payment_discount,
-                                                                               :due_date))
+            invoice_duplicated.assign_attributes(iugu_invoice_duplicated.slice(:total_cents, :secure_url, :items, :ignore_due_email,
+                                                                               :ignore_canceled_email, :current_fines_option,
+                                                                               :keep_early_payment_discount, :due_date))
+
+            invoice_duplicated.assign_attributes(iugu_invoice_duplicated.dig(:bank_slip).slice(:digitable_line, :barcode_data, :barcode))
 
             invoice_duplicated.duplicated = true
 
