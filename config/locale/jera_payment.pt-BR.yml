@@ -157,7 +157,7 @@ pt-BR:
         due_date: Data de vencimento
         ensure_workday_due_date: Vencimento apenas em dia de semana
         items: Itens
-        commissions: Comições
+        commissions: Comissões
         total_cents: Valor total em centavos
         discount_cents: Desconto em centavos
         payable_with: Pagável com
