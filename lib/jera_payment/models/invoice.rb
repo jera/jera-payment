@@ -6,10 +6,11 @@ class JeraPayment::Invoice < ActiveRecord::Base
   extend Enumerize
 
   attr_readonly :api_id, :customer, :email, :cc_emails, :due_date,
-                :ensure_workday_due_date, :items, :total_cents, :discount_cents,
+                :ensure_workday_due_date, :items, :commissions, :total_cents, :discount_cents,
                 :payable_with, :return_url, :expired_url, :notification_url, :fines,
                 :late_payment_fine, :per_day_interest, :ignore_due_email, :subscription_api_id,
-                :credits, :early_payment_discount, :early_payment_discounts, :payer, :paid_at, :secure_url, :digitable_line, :barcode_data, :barcode
+                :credits, :early_payment_discount, :early_payment_discounts, :payer, :paid_at,
+                :secure_url, :digitable_line, :barcode_data, :barcode
 
   self.table_name = 'jera_payment_invoices'
 
@@ -28,6 +29,14 @@ class JeraPayment::Invoice < ActiveRecord::Base
 
   def items
     ActiveSupport::JSON.decode(self[:items]) if self[:items]
+  end
+
+  def commissions=(value)
+    write_attribute(:commissions, value&.to_json)
+  end
+
+  def commissions
+    ActiveSupport::JSON.decode(self[:commissions]) if self[:commissions]
   end
 
   def early_payment_discounts=(value)
